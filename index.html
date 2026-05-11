@@ -196,12 +196,113 @@
       padding: 20px 56px;
     }
 
-    .btn--nav {
+    /* ═══════════════════════════════════════════════════════════════
+       SHARED — Inline section CTA
+    ════════════════════════════════════════════════════════════════ */
+    .section-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 56px;
+    }
+
+    .section-cta--left {
+      align-items: flex-start;
+    }
+
+    .section-cta__btn {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
       background: var(--color-primary);
       color: var(--color-white);
-      font-weight: 600;
-      font-size: 13px;
-      padding: 10px 22px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+      box-shadow: 0 14px 32px rgba(196, 107, 75, 0.32);
+    }
+
+    .section-cta__btn::after {
+      content: '→';
+      font-size: 17px;
+      transition: transform 0.3s ease;
+    }
+
+    .section-cta__btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+      transform: translateX(-120%) skewX(-18deg);
+      animation: cta-shine 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @media (hover: hover) {
+      .section-cta__btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(196, 107, 75, 0.45);
+        filter: brightness(1.05);
+      }
+      .section-cta__btn:hover::after {
+        transform: translateX(4px);
+      }
+    }
+
+    /* Variante para fundo escuro */
+    .section-cta__btn--dark {
+      background: var(--color-dark);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .section-cta__btn--dark:hover {
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Variante outline para sobre cartões coloridos */
+    .section-cta__btn--outline {
+      background: transparent;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+      box-shadow: none;
+    }
+
+    .section-cta__btn--outline:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    .section-cta__hint {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+      text-align: center;
+    }
+
+    .section-cta--dark .section-cta__hint {
+      color: rgba(247, 236, 226, 0.7);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section-cta__btn,
+      .section-cta__btn::before {
+        animation: none;
+        transition: none;
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -298,55 +399,6 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       NAVBAR
-    ════════════════════════════════════════════════════════════════ */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(45, 64, 26, 0.97);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(196, 107, 75, 0.18);
-      transform: translateY(-100%);
-      transition: transform 0.4s ease;
-    }
-
-    .navbar.is-visible {
-      transform: translateY(0);
-    }
-
-    .navbar__inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 16px 48px;
-    }
-
-    .navbar__logo {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--font-headline);
-      font-size: 19px;
-      color: var(--color-cream);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      line-height: 0;
-    }
-
-    .navbar__logo img {
-      display: block;
-      height: 36px;
-      width: auto;
-      object-fit: contain;
-      border-radius: 8px;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
        [1] HERO SECTION
        ─────────────────────────────────────────────────────────────
        Imagens de fundo:
@@ -393,9 +445,12 @@
     }
 
     .hero__headline {
+      font-family: var(--font-headline);
       font-size: clamp(34px, 4vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
       color: var(--color-white);
-      font-weight: 500;
       -webkit-text-stroke: 4px var(--color-dark);
       paint-order: stroke fill;
       margin-bottom: 28px;
@@ -412,6 +467,7 @@
       color: var(--color-muted);
       line-height: 1.8;
       margin-bottom: 48px;
+      max-width: 474px;
     }
 
     .hero__cta-group {
@@ -490,8 +546,9 @@
     /* Bullets viram cards modernos */
     .pain__list {
       list-style: none;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 14px;
       margin-bottom: 56px;
       text-align: left;
@@ -502,6 +559,8 @@
       counter-increment: pain-item;
       position: relative;
       overflow: hidden;
+      flex: 0 1 calc(33.333% - 10px);
+      min-width: 200px;
       font-size: 15px;
       color: var(--color-dark);
       background: var(--color-white);
@@ -1879,14 +1938,6 @@
         padding: 0 24px;
       }
 
-      .navbar__inner {
-        padding: 14px 24px;
-      }
-
-      .navbar__logo img {
-        height: 18px;
-      }
-
       /* Hero — conteúdo no rodapé da seção; topo livre ~350px para a arte mobile */
       .hero {
         flex-direction: column;
@@ -1993,9 +2044,9 @@
         margin: 0;
       }
 
-      /* Pain: bullets viram uma coluna */
-      .pain__list {
-        grid-template-columns: 1fr;
+      /* Pain: bullets em 2 colunas no tablet */
+      .pain__list li {
+        flex: 0 1 calc(50% - 7px);
       }
 
       /* Bonus: items em 2 colunas */
@@ -2026,6 +2077,11 @@
 
       /* Bonus: items em coluna única */
       .bonus__item { flex: 0 1 100%; }
+
+      /* Pain: bullets em coluna única no mobile */
+      .pain__list li {
+        flex: 0 1 100%;
+      }
 
       /* Mechanism pillars — 2 colunas no mobile */
       .pillars {
@@ -2080,19 +2136,6 @@
   </style>
 </head>
 <body>
-
-  <!-- ═══════════════════════════════════════════════════════════
-       NAVBAR — aparece após 80px de scroll
-  ════════════════════════════════════════════════════════════ -->
-  <nav class="navbar" id="js-navbar" aria-label="Navegação">
-    <div class="navbar__inner">
-      <a href="#" class="navbar__logo" aria-label="Studio Leh Crafts — Laboratório de Encadernação">
-        <img src="logo.png" alt="Studio Leh Crafts — Laboratório de Encadernação" />
-      </a>
-      <a href="#" class="btn btn--nav">Grupo VIP</a>
-    </div>
-  </nav>
-
 
   <!-- ═══════════════════════════════════════════════════════════
        [1] HERO
@@ -2163,6 +2206,11 @@
           E essa diferença está na estrutura, no acabamento e na técnica.
         </p>
 
+        <div class="section-cta fade-in">
+          <a href="#" class="section-cta__btn">Quero resolver isso agora</a>
+          <span class="section-cta__hint">Acesso gratuito ao Grupo VIP</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -2232,6 +2280,11 @@
         </li>
       </ul>
 
+      <div class="section-cta section-cta--dark fade-in d-5">
+        <a href="#" class="section-cta__btn">Quero dominar essa técnica</a>
+        <span class="section-cta__hint">Vagas limitadas no Grupo VIP</span>
+      </div>
+
     </div>
   </section>
 
@@ -2281,6 +2334,10 @@
           <p class="curriculum__close fade-in">
             Tudo pensado para criar uma linha visual coesa, sofisticada e com valor percebido elevado.
           </p>
+
+          <div class="section-cta section-cta--left fade-in d-2">
+            <a href="#" class="section-cta__btn">Quero criar minha coleção</a>
+          </div>
         </div>
 
         <aside class="curriculum__media fade-in d-1">
@@ -2336,6 +2393,11 @@
             que acredita serem essenciais para dominar a encadernação artesanal com
             excelência, cuidado e identidade em cada peça.
           </p>
+
+          <div class="section-cta section-cta--left section-cta--dark fade-in d-5">
+            <a href="#" class="section-cta__btn">Quero aprender com Leandro</a>
+            <span class="section-cta__hint">Aula de abertura em 05/06</span>
+          </div>
         </div>
 
       </div>
@@ -2399,6 +2461,11 @@
         <p>"O foco é aprender a pensar e construir como uma encadernação profissional."</p>
       </div>
 
+      <div class="section-cta fade-in">
+        <a href="#" class="section-cta__btn">Quero participar do Laboratório</a>
+        <span class="section-cta__hint">Mesmo sem ateliê profissional</span>
+      </div>
+
     </div>
   </section>
 
@@ -2444,6 +2511,12 @@
         </div>
 
       </div>
+
+      <div class="section-cta section-cta--dark fade-in d-3">
+        <a href="#" class="section-cta__btn">Quero estar no Depois</a>
+        <span class="section-cta__hint">Garanta sua vaga no Grupo VIP</span>
+      </div>
+
     </div>
   </section>
 
@@ -2496,6 +2569,12 @@
         </div>
 
       </div>
+
+      <div class="section-cta fade-in d-4">
+        <a href="#" class="section-cta__btn">Quero receber os gabaritos</a>
+        <span class="section-cta__hint">Bônus exclusivo do Laboratório</span>
+      </div>
+
     </div>
   </section>
 
@@ -2592,18 +2671,6 @@
   ════════════════════════════════════════════════════════════ -->
   <script>
     'use strict';
-
-    /* ── Navbar: aparece após 80px de scroll ── */
-    const navbar = document.getElementById('js-navbar');
-
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 80) {
-        navbar.classList.add('is-visible');
-      } else {
-        navbar.classList.remove('is-visible');
-      }
-    }, { passive: true });
-
 
     /* ── Intersection Observer: fade-in com stagger ── */
     const observerOptions = {
