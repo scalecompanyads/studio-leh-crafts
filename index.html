@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Laboratório Sewn Boards — Aprenda a criar um kit completo de papelaria premium com a técnica Sewn Boards Binding. Studio Leh Crafts com Leandro Mendes." />
+  <title>Laboratório Sewn Boards — Studio Leh Crafts</title>
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       FONT FACE — Bigola
+       Substitua a src abaixo pelo arquivo real quando disponível.
+       Fallback: Georgia serif (editorial, similar em peso visual).
+    ════════════════════════════════════════════════════════════════ */
+    /* @font-face {
+      font-family: 'Bigola';
+      src: url('fonts/Bigola.woff2') format('woff2'),
+           url('fonts/Bigola.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    } */
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESET & BASE
+    ════════════════════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CSS VARIABLES
+    ════════════════════════════════════════════════════════════════ */
+    :root {
+      --color-primary: #c46b4b;
+      --color-dark:    #3d5628;
+      --color-muted:   #92776f;
+      --color-white:   #ffffff;
+      --color-accent:  #6c7a3a;
+      --color-cream:   #f7ece2;
+
+      --font-headline: 'Bigola', Georgia, serif;
+      --font-body:     'Montserrat', sans-serif;
+
+      --container: 1200px;
+      --ease:      0.6s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.8;
+      letter-spacing: 0.01em;
+      color: var(--color-dark);
+      background-color: var(--color-dark);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ─── Ruído / grão de filme (sempre rolando) ───
+       Tile maior que a viewport + translate em passos discretos
+       cria a sensação de grão de filme contínuo, sem voltar ao ponto inicial. */
+    @keyframes noise-grain {
+      0%   { transform: translate3d(0,        0,        0); }
+      10%  { transform: translate3d(-5%,     -8%,       0); }
+      20%  { transform: translate3d(-12%,     4%,       0); }
+      30%  { transform: translate3d(7%,      -10%,      0); }
+      40%  { transform: translate3d(-7%,      12%,      0); }
+      50%  { transform: translate3d(10%,      6%,       0); }
+      60%  { transform: translate3d(-3%,     -12%,      0); }
+      70%  { transform: translate3d(12%,     -4%,       0); }
+      80%  { transform: translate3d(-9%,      9%,       0); }
+      90%  { transform: translate3d(6%,     -7%,        0); }
+      100% { transform: translate3d(0,        0,        0); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      /* Tile maior que a viewport para que o translate não exponha bordas */
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.24;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 360px 360px;
+      animation: noise-grain 0.58s steps(10) infinite;
+      will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::after {
+        animation: none;
+        opacity: 0.11;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TYPOGRAPHY BASE
+    ════════════════════════════════════════════════════════════════ */
+    h1, h2, h3 {
+      font-family: var(--font-headline);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--color-white);
+      -webkit-text-stroke: 3px var(--color-dark);
+      paint-order: stroke fill;
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       LAYOUT
+    ════════════════════════════════════════════════════════════════ */
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SHARED COMPONENTS
+    ════════════════════════════════════════════════════════════════ */
+
+    /* Section divider — linha fina 60px centralizada */
+    .divider {
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--color-primary);
+      margin: 40px auto;
+    }
+
+    /* Label uppercase */
+    .label-upper {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      text-decoration: none;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .btn--primary {
+      background: var(--color-primary);
+      color: var(--color-white);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 18px 40px;
+    }
+
+    .btn--dark {
+      background: var(--color-dark);
+      color: var(--color-white);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 20px 56px;
+    }
+
+    .btn--nav {
+      background: var(--color-primary);
+      color: var(--color-white);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 10px 22px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       ANIMATION — Intersection Observer
+    ════════════════════════════════════════════════════════════════ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity var(--ease), transform var(--ease);
+    }
+
+    .fade-in.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delays */
+    .d-1 { transition-delay: 0.10s; }
+    .d-2 { transition-delay: 0.20s; }
+    .d-3 { transition-delay: 0.30s; }
+    .d-4 { transition-delay: 0.40s; }
+    .d-5 { transition-delay: 0.50s; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SHARED — Section Tag (pílula editorial)
+    ════════════════════════════════════════════════════════════════ */
+    @keyframes dot-pulse {
+      0%, 100% { transform: scale(1);    opacity: 0.6; }
+      50%      { transform: scale(1.25); opacity: 1;   }
+    }
+
+    @keyframes headline-glow {
+      0%, 100% { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.2); }
+      50%      { text-shadow: 0 1px 24px rgba(196, 107, 75, 0.25), 0 1px 14px rgba(0, 0, 0, 0.2); }
+    }
+
+    @keyframes section-aurora {
+      0%   { transform: translate3d(-6%, -4%, 0) rotate(0deg);   }
+      50%  { transform: translate3d(6%,   4%, 0) rotate(180deg); }
+      100% { transform: translate3d(-6%, -4%, 0) rotate(360deg); }
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 999px;
+      margin-bottom: 22px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: dot-pulse 2.4s ease-in-out infinite;
+    }
+
+    /* Variante para fundo claro (cream) */
+    .section-tag--light {
+      color: var(--color-primary);
+      background: rgba(196, 107, 75, 0.1);
+      border: 1px solid rgba(196, 107, 75, 0.35);
+    }
+    .section-tag--light::before { background: var(--color-primary); }
+
+    /* Variante para fundo escuro (verde) */
+    .section-tag--dark {
+      color: var(--color-cream);
+      background: rgba(196, 107, 75, 0.18);
+      border: 1px solid rgba(196, 107, 75, 0.45);
+    }
+    .section-tag--dark::before { background: var(--color-primary); }
+
+    /* Destaque dentro de headlines */
+    .headline-em {
+      font-style: italic;
+      color: var(--color-primary);
+    }
+    .headline-em--cream {
+      color: var(--color-cream);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section-tag::before { animation: none; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       NAVBAR
+    ════════════════════════════════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(45, 64, 26, 0.97);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(196, 107, 75, 0.18);
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    .navbar.is-visible {
+      transform: translateY(0);
+    }
+
+    .navbar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 16px 48px;
+    }
+
+    .navbar__logo {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-headline);
+      font-size: 19px;
+      color: var(--color-cream);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      line-height: 0;
+    }
+
+    .navbar__logo img {
+      display: block;
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [1] HERO SECTION
+       ─────────────────────────────────────────────────────────────
+       Imagens de fundo:
+         Desktop → substitua 'images/hero-desktop.jpg'
+         Mobile  → mobile-bg.jpg  (via @media abaixo)
+    ════════════════════════════════════════════════════════════════ */
+    .hero {
+      /* Cor de fallback enquanto a imagem carrega */
+      background-color: var(--color-cream);
+
+      /* IMAGEM DESKTOP */
+      background-image: url('desktop-bg.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 96px;
+      position: relative;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: 558px;
+    }
+
+    .hero__eyebrow {
+      color: var(--color-primary);
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .hero__logo {
+      display: block;
+      width: auto;
+      max-width: 260px;
+      height: auto;
+      margin-bottom: 28px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .hero__headline {
+      font-size: clamp(34px, 4vw, 56px);
+      color: var(--color-white);
+      font-weight: 500;
+      -webkit-text-stroke: 4px var(--color-dark);
+      paint-order: stroke fill;
+      margin-bottom: 28px;
+    }
+
+    .hero__headline em {
+      -webkit-text-stroke: 3px #ffffff;
+      paint-order: stroke fill;
+    }
+
+    .hero__subheadline {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--color-muted);
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+
+    .hero__cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .hero__microcopy {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--color-muted);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [2] PAIN SECTION
+    ════════════════════════════════════════════════════════════════ */
+    .pain {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse 60% 35% at 50% 0%, rgba(196, 107, 75, 0.08) 0%, transparent 55%),
+        var(--color-cream);
+      padding: 80px 0 120px;
+    }
+
+    .pain::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(61, 86, 40, 0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, #000 25%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, #000 25%, transparent 75%);
+    }
+
+    .pain .container { position: relative; z-index: 1; }
+
+    .pain__inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .pain__headline {
+      font-size: clamp(20px, 5vw, 44px);
+      margin-bottom: 28px;
+      text-align: center;
+      color: #010101;
+      -webkit-text-stroke: 0;
+      line-height: 1.2;
+    }
+
+    .pain__headline-line {
+      display: block;
+    }
+
+    .pain__copy {
+      font-size: 17px;
+      color: var(--color-dark);
+      margin-bottom: 44px;
+      line-height: 1.8;
+    }
+
+    .pain__result-label {
+      color: var(--color-primary);
+      display: block;
+      margin-bottom: 28px;
+    }
+
+    /* Bullets viram cards modernos */
+    .pain__list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 56px;
+      text-align: left;
+      counter-reset: pain-item;
+    }
+
+    .pain__list li {
+      counter-increment: pain-item;
+      position: relative;
+      overflow: hidden;
+      font-size: 15px;
+      color: var(--color-dark);
+      background: var(--color-white);
+      border: 1px solid rgba(146, 119, 111, 0.18);
+      border-radius: 12px;
+      padding: 22px 22px 22px 26px;
+      line-height: 1.5;
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .pain__list li::before {
+      content: '0' counter(pain-item);
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-family: var(--font-headline);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: rgba(196, 107, 75, 0.55);
+    }
+
+    .pain__list li::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--color-primary) 0%, rgba(196, 107, 75, 0.35) 100%);
+      border-radius: 12px 0 0 12px;
+    }
+
+    @media (hover: hover) {
+      .pain__list li:hover {
+        transform: translateY(-3px);
+        border-color: rgba(196, 107, 75, 0.4);
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    /* Citação destacada com aspas grandes */
+    .pain__contrast {
+      position: relative;
+      font-size: 19px;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--color-dark);
+      line-height: 1.7;
+      margin: 0 auto 32px;
+      max-width: 640px;
+      padding: 38px 36px;
+      background: linear-gradient(155deg, rgba(196, 107, 75, 0.08) 0%, transparent 60%), var(--color-white);
+      border-radius: 16px;
+      border: 1px solid rgba(196, 107, 75, 0.2);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    .pain__contrast::before {
+      content: '"';
+      position: absolute;
+      top: -8px;
+      left: 24px;
+      font-family: var(--font-headline);
+      font-size: 110px;
+      line-height: 1;
+      color: rgba(196, 107, 75, 0.18);
+      pointer-events: none;
+    }
+
+    .pain__close {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--color-dark);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [3] MECHANISM SECTION
+    ════════════════════════════════════════════════════════════════ */
+    .mechanism {
+      --mech-card-bg: #2a3d1f;
+      --mech-card-border: rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background-color: var(--color-dark);
+      background-image:
+        radial-gradient(ellipse 90% 55% at 50% -15%, rgba(196, 107, 75, 0.18) 0%, transparent 52%),
+        radial-gradient(ellipse 70% 45% at 100% 80%, rgba(108, 122, 58, 0.12) 0%, transparent 50%),
+        linear-gradient(180deg, #334824 0%, var(--color-dark) 28%, #2f4522 100%);
+      padding: 120px 0;
+    }
+
+    .mechanism::before {
+      content: '';
+      position: absolute;
+      inset: -25%;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(196, 107, 75, 0.18) 0%, transparent 38%),
+        radial-gradient(circle at 80% 70%, rgba(247, 236, 226, 0.1) 0%, transparent 40%);
+      filter: blur(45px);
+      animation: section-aurora 26s linear infinite;
+    }
+
+    .mechanism .container { position: relative; z-index: 1; }
+
+    .mechanism__header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .mechanism__headline {
+      font-size: clamp(28px, 3.5vw, 44px);
+      color: #fdf9f5;
+      -webkit-text-stroke: 0;
+      paint-order: normal;
+      max-width: 720px;
+      margin: 0 auto 22px;
+      line-height: 1.2;
+      text-shadow: 0 1px 24px rgba(0, 0, 0, 0.25);
+      animation: headline-glow 6s ease-in-out infinite;
+    }
+
+    .mechanism__sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(247, 236, 226, 0.94);
+      letter-spacing: 0.03em;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* Pilares — cards com profundidade e acento */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-bottom: 72px;
+    }
+
+    .pillar {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      min-height: 150px;
+      text-align: center;
+      background:
+        linear-gradient(155deg, rgba(255, 255, 255, 0.07) 0%, transparent 42%),
+        var(--mech-card-bg);
+      border: 1px solid var(--mech-card-border);
+      border-radius: 14px;
+      padding: 24px 16px;
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .pillar::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--color-primary) 0%, rgba(196, 107, 75, 0.45) 100%);
+      border-radius: 14px 0 0 14px;
+    }
+
+    @media (hover: hover) {
+      .pillar:hover {
+        transform: translateY(-4px);
+        border-color: rgba(196, 107, 75, 0.45);
+        box-shadow:
+          0 18px 48px rgba(0, 0, 0, 0.42),
+          0 0 0 1px rgba(196, 107, 75, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pillar {
+        transition: none;
+      }
+      @media (hover: hover) {
+        .pillar:hover {
+          transform: none;
+        }
+      }
+    }
+
+    /* 5th pillar — em desktop (5 colunas) todos cabem na mesma linha,
+       então a regra de centralização especial só é aplicada nos breakpoints menores. */
+
+    .pillar__number {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 10px;
+      font-family: var(--font-headline);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--color-primary);
+      border: 1px solid rgba(196, 107, 75, 0.5);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .pillar__title {
+      font-family: var(--font-headline);
+      font-size: 18px;
+      font-weight: 500;
+      color: #fdf9f5;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    /* Result bullets */
+    .result-list {
+      list-style: none;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 8px 28px 12px;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .result-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(247, 236, 226, 0.95);
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      line-height: 1.55;
+    }
+
+    .result-list li:last-child {
+      border-bottom: none;
+    }
+
+    .result-list__check {
+      color: var(--color-accent);
+      flex-shrink: 0;
+      font-size: 16px;
+      margin-top: 3px;
+      text-shadow: 0 0 12px rgba(108, 122, 58, 0.45);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [4] CURRICULUM SECTION
+    ════════════════════════════════════════════════════════════════ */
+    .curriculum {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse 50% 30% at 100% 0%, rgba(196, 107, 75, 0.1) 0%, transparent 50%),
+        var(--color-cream);
+      padding: 120px 0;
+    }
+
+    .curriculum::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(61, 86, 40, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61, 86, 40, 0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 35%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 35%, transparent 80%);
+    }
+
+    .curriculum .container { position: relative; z-index: 1; }
+
+    .curriculum__grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .curriculum__header {
+      text-align: left;
+      margin-bottom: 36px;
+    }
+
+    .curriculum__headline {
+      font-size: clamp(26px, 3.5vw, 44px);
+      max-width: none;
+      margin: 0 0 18px;
+      color: #010101;
+      -webkit-text-stroke: 0;
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .curriculum__copy {
+      font-size: 17px;
+      color: var(--color-dark);
+      max-width: none;
+      margin: 0;
+      text-align: left;
+      line-height: 1.7;
+    }
+
+    /* Kit list — vertical, alinhado à esquerda */
+    .kit-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .kit-card {
+      background: var(--color-white);
+      padding: 18px 22px;
+      border-top: none;
+      border-left: 3px solid var(--color-primary);
+      border-radius: 0 12px 12px 0;
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 18px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    @media (hover: hover) {
+      .kit-card:hover {
+        transform: translateX(4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.09);
+      }
+    }
+
+    .kit-card__number {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      border-radius: 8px;
+      background: rgba(196, 107, 75, 0.1);
+      border: 1px solid rgba(196, 107, 75, 0.25);
+    }
+
+    .kit-card__title {
+      font-family: var(--font-headline);
+      font-size: 19px;
+      color: var(--color-dark);
+      line-height: 1.25;
+      font-weight: normal;
+    }
+
+    .curriculum__close {
+      text-align: left;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-primary);
+      max-width: none;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Coluna direita — imagem do kit */
+    .curriculum__media {
+      width: 100%;
+    }
+
+    .curriculum__image {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [5] ABOUT LEANDRO
+    ════════════════════════════════════════════════════════════════ */
+    .about {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse 70% 50% at 0% 0%, rgba(196, 107, 75, 0.16) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 45% at 100% 100%, rgba(108, 122, 58, 0.18) 0%, transparent 55%),
+        linear-gradient(180deg, #3a5025 0%, var(--color-dark) 50%, #2d3f1e 100%);
+      padding: 120px 0;
+    }
+
+    .about::before {
+      content: '';
+      position: absolute;
+      inset: -25%;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(196, 107, 75, 0.22) 0%, transparent 38%),
+        radial-gradient(circle at 70% 60%, rgba(247, 236, 226, 0.12) 0%, transparent 42%);
+      filter: blur(50px);
+      animation: section-aurora 30s linear infinite reverse;
+    }
+
+    .about .container { position: relative; z-index: 1; }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about__photo {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(196, 107, 75, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .about__photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.35) 100%);
+    }
+
+    .about__photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    @media (hover: hover) {
+      .about__photo:hover img {
+        transform: scale(1.04);
+      }
+    }
+
+    .about__headline {
+      font-size: clamp(26px, 3vw, 40px);
+      color: var(--color-white);
+      margin-bottom: 28px;
+      line-height: 1.2;
+      animation: headline-glow 7s ease-in-out infinite;
+    }
+
+    .about__copy {
+      font-size: 16px;
+      color: rgba(247, 236, 226, 0.92);
+      margin-bottom: 20px;
+      line-height: 1.75;
+    }
+
+    .about__label {
+      font-size: 16px;
+      color: var(--color-cream);
+      margin-bottom: 20px;
+    }
+
+    .about__list {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+
+    .about__list li {
+      font-size: 15px;
+      color: var(--color-muted);
+      border-left: 2px solid var(--color-primary);
+      padding: 11px 0 11px 20px;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .about__close {
+      font-size: 16px;
+      color: rgba(247, 236, 226, 0.95);
+      font-weight: 500;
+      padding: 20px 0 0;
+      border-top: 1px solid rgba(247, 236, 226, 0.12);
+      line-height: 1.75;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [6] EQUIPMENT OBJECTION
+    ════════════════════════════════════════════════════════════════ */
+    .equipment {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse 60% 35% at 50% 100%, rgba(108, 122, 58, 0.1) 0%, transparent 55%),
+        var(--color-cream);
+      padding: 120px 0;
+    }
+
+    .equipment::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(61, 86, 40, 0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 25%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 25%, transparent 75%);
+    }
+
+    .equipment .container { position: relative; z-index: 1; }
+
+    .equipment__center {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .equipment__headline {
+      font-size: clamp(26px, 3.2vw, 40px);
+      margin-bottom: 4px;
+      line-height: 1.25;
+      color: #010101;
+      -webkit-text-stroke: 0;
+    }
+
+    .equipment__no {
+      display: block;
+      font-family: var(--font-headline);
+      font-size: clamp(72px, 10vw, 108px);
+      color: var(--color-primary);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin: 4px 0 36px;
+      text-shadow: 0 4px 24px rgba(196, 107, 75, 0.25);
+    }
+
+    .equipment__copy {
+      font-size: 17px;
+      color: var(--color-dark);
+      line-height: 1.8;
+      margin-bottom: 64px;
+    }
+
+    /* 2x2 card grid */
+    .equipment__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 720px;
+      margin: 0 auto 56px;
+      text-align: left;
+    }
+
+    .equipment__card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(155deg, rgba(196, 107, 75, 0.06) 0%, transparent 60%),
+        var(--color-white);
+      border: 1px solid rgba(146, 119, 111, 0.25);
+      border-radius: 12px;
+      padding: 24px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    @media (hover: hover) {
+      .equipment__card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(196, 107, 75, 0.4);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .equipment__icon {
+      width: 32px;
+      height: 32px;
+      color: var(--color-accent);
+      flex-shrink: 0;
+      padding: 6px;
+      box-sizing: content-box;
+      background: rgba(108, 122, 58, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(108, 122, 58, 0.25);
+    }
+
+    .equipment__card-title {
+      font-family: var(--font-headline);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--color-dark);
+      line-height: 1.35;
+    }
+
+    .equipment__close {
+      text-align: center;
+    }
+
+    .equipment__close p {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--color-dark);
+      line-height: 1.6;
+      margin-bottom: 6px;
+      font-style: italic;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [7] BEFORE / AFTER
+    ════════════════════════════════════════════════════════════════ */
+    .transformation {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse 60% 35% at 50% 0%, rgba(196, 107, 75, 0.15) 0%, transparent 55%),
+        linear-gradient(180deg, #3a5025 0%, var(--color-dark) 100%);
+      padding: 120px 0;
+    }
+
+    .transformation::before {
+      content: '';
+      position: absolute;
+      inset: -25%;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 25% 50%, rgba(196, 107, 75, 0.18) 0%, transparent 38%),
+        radial-gradient(circle at 75% 50%, rgba(108, 122, 58, 0.18) 0%, transparent 40%);
+      filter: blur(50px);
+      animation: section-aurora 28s linear infinite;
+    }
+
+    .transformation .container { position: relative; z-index: 1; }
+
+    .transformation__header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .transformation__headline {
+      font-size: clamp(30px, 4vw, 52px);
+      color: var(--color-white);
+      animation: headline-glow 7s ease-in-out infinite;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    /* Antes × Depois — caderno aberto (Sewn Boards) */
+    .ba-wrapper {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 3px 1fr;
+      max-width: 1040px;
+      margin: 0 auto;
+      background: #fffaf0;
+      border-radius: 16px;
+      box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.45),
+        0 12px 28px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* Costura aparente (inspirada na técnica Sewn Boards) */
+    .ba-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      border: 1.5px dashed rgba(196, 107, 75, 0.55);
+      border-radius: 9px;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Vinheta/ sombra suave nas extremidades da “página” */
+    .ba-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 0%, rgba(0, 0, 0, 0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 75% 50% at 50% 100%, rgba(0, 0, 0, 0.06) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    /* Lombada/encadernação central */
+    .ba-divider {
+      position: relative;
+      background: linear-gradient(180deg,
+        rgba(0, 0, 0, 0.18) 0%,
+        rgba(0, 0, 0, 0.08) 50%,
+        rgba(0, 0, 0, 0.18) 100%);
+      box-shadow:
+        -6px 0 14px -6px rgba(0, 0, 0, 0.18),
+        6px 0 14px -6px rgba(0, 0, 0, 0.18);
+      z-index: 2;
+    }
+
+    .ba-col {
+      position: relative;
+      background:
+        repeating-linear-gradient(180deg,
+          transparent 0,
+          transparent 31px,
+          rgba(61, 86, 40, 0.12) 31px,
+          rgba(61, 86, 40, 0.12) 32px),
+        #fffaf0;
+      padding: 60px 44px 56px;
+      z-index: 2;
+    }
+
+    .ba-col__title {
+      display: inline-block;
+      font-family: var(--font-headline);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      background: rgba(196, 107, 75, 0.08);
+    }
+
+    .ba-col--before .ba-col__title { color: var(--color-muted); }
+    .ba-col--after  .ba-col__title { color: var(--color-accent); }
+
+    .ba-list {
+      list-style: none;
+    }
+
+    .ba-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 15px;
+      color: #2d3a18;
+      padding: 11px 0;
+      border-bottom: 1px dashed rgba(61, 86, 40, 0.22);
+      line-height: 1.6;
+    }
+
+    .ba-list li:last-child {
+      border-bottom: none;
+    }
+
+    .ba-icon {
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      font-weight: 700;
+    }
+
+    .ba-col--before .ba-icon { color: #b56b56; }
+    .ba-col--after  .ba-icon { color: var(--color-accent); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [8] BONUS
+    ════════════════════════════════════════════════════════════════ */
+    .bonus {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse 55% 35% at 50% 0%, rgba(196, 107, 75, 0.1) 0%, transparent 55%),
+        var(--color-cream);
+      padding: 120px 0;
+      text-align: center;
+    }
+
+    .bonus::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(196, 107, 75, 0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 25%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 25%, transparent 75%);
+    }
+
+    .bonus .container { position: relative; z-index: 1; }
+
+    .bonus__tag {
+      display: none;
+    }
+
+    .bonus__headline {
+      font-size: clamp(26px, 3.2vw, 40px);
+      max-width: 660px;
+      margin: 0 auto 24px;
+      line-height: 1.2;
+      color: #010101;
+      -webkit-text-stroke: 0;
+    }
+
+    .bonus__copy {
+      font-size: 17px;
+      color: var(--color-dark);
+      max-width: 540px;
+      margin: 0 auto 64px;
+      line-height: 1.7;
+    }
+
+    .bonus__items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      max-width: 720px;
+      margin: 0 auto;
+      gap: 16px;
+    }
+
+    .bonus__item {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      flex: 0 1 calc(33.333% - 11px);
+      min-width: 180px;
+      padding: 28px 20px;
+      background:
+        linear-gradient(155deg, rgba(196, 107, 75, 0.06) 0%, transparent 55%),
+        var(--color-white);
+      border: 1px solid rgba(196, 107, 75, 0.18);
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    @media (hover: hover) {
+      .bonus__item:hover {
+        transform: translateY(-4px);
+        border-color: rgba(196, 107, 75, 0.4);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .bonus__item-icon {
+      width: 30px;
+      height: 30px;
+      color: var(--color-primary);
+      padding: 12px;
+      box-sizing: content-box;
+      background: rgba(196, 107, 75, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(196, 107, 75, 0.25);
+    }
+
+    .bonus__item-text {
+      font-family: var(--font-headline);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--color-dark);
+      letter-spacing: -0.01em;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [9] FOR WHOM
+    ════════════════════════════════════════════════════════════════ */
+    @keyframes for-whom-aurora {
+      0%   { transform: translate3d(6%,  -4%, 0) rotate(0deg);   }
+      50%  { transform: translate3d(-6%,  4%, 0) rotate(180deg); }
+      100% { transform: translate3d(6%,  -4%, 0) rotate(360deg); }
+    }
+
+    @keyframes for-whom-headline-glow {
+      0%, 100% { text-shadow: 0 1px 18px rgba(0, 0, 0, 0.4); }
+      50%      { text-shadow: 0 1px 28px rgba(196, 107, 75, 0.35), 0 1px 18px rgba(0, 0, 0, 0.4); }
+    }
+
+    @keyframes for-whom-check-pop {
+      0%, 100% { transform: scale(1);   filter: drop-shadow(0 0 0 rgba(108, 122, 58, 0)); }
+      50%      { transform: scale(1.08); filter: drop-shadow(0 0 6px rgba(108, 122, 58, 0.6)); }
+    }
+
+    .for-whom {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      padding: 140px 0 132px;
+      color: var(--color-white);
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(196, 107, 75, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 65% 50% at 100% 100%, rgba(108, 122, 58, 0.22) 0%, transparent 60%),
+        linear-gradient(160deg, #3f5a2a 0%, var(--color-dark) 45%, #2d3f1e 100%);
+    }
+
+    /* Aurora rotativa */
+    .for-whom::before {
+      content: '';
+      position: absolute;
+      inset: -30%;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(196, 107, 75, 0.28) 0%, transparent 38%),
+        radial-gradient(circle at 75% 70%, rgba(247, 236, 226, 0.16) 0%, transparent 38%),
+        radial-gradient(circle at 50% 50%, rgba(108, 122, 58, 0.18) 0%, transparent 55%);
+      filter: blur(40px);
+      animation: for-whom-aurora 22s linear infinite;
+      pointer-events: none;
+    }
+
+    /* Grade fina decorativa */
+    .for-whom::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(247, 236, 226, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 236, 226, 0.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 30%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .for-whom .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .for-whom__header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .for-whom__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-cream);
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(196, 107, 75, 0.18);
+      border: 1px solid rgba(196, 107, 75, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      margin-bottom: 22px;
+    }
+
+    .for-whom__tag::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      animation: cta-pulse 2.4s ease-in-out infinite;
+    }
+
+    .for-whom__headline {
+      font-size: clamp(28px, 4vw, 48px);
+      color: var(--color-white);
+      -webkit-text-stroke: 0;
+      max-width: 720px;
+      margin: 0 auto 18px;
+      line-height: 1.15;
+      animation: for-whom-headline-glow 6s ease-in-out infinite;
+    }
+
+    .for-whom__headline em {
+      font-style: italic;
+      color: var(--color-cream);
+    }
+
+    .for-whom__sub {
+      font-size: clamp(16px, 1.4vw, 19px);
+      color: rgba(247, 236, 226, 0.88);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Lista vira grid de cards */
+    .for-whom__list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .for-whom__list li {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(247, 236, 226, 0.95);
+      padding: 22px 26px;
+      border: 1px solid rgba(247, 236, 226, 0.12);
+      border-radius: 14px;
+      background:
+        linear-gradient(155deg, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+        rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      line-height: 1.45;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+    }
+
+    .for-whom__list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--color-primary) 0%, rgba(196, 107, 75, 0.4) 100%);
+      border-radius: 14px 0 0 14px;
+    }
+
+    /* Item solitário (5º) centralizado */
+    .for-whom__list li:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: calc(50% - 8px);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    @media (hover: hover) {
+      .for-whom__list li:hover {
+        transform: translateY(-4px);
+        border-color: rgba(196, 107, 75, 0.5);
+        background:
+          linear-gradient(155deg, rgba(196, 107, 75, 0.14) 0%, transparent 60%),
+          rgba(0, 0, 0, 0.3);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    .for-whom__check {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(108, 122, 58, 0.22);
+      border: 1px solid rgba(108, 122, 58, 0.55);
+      color: var(--color-accent);
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 0;
+      animation: for-whom-check-pop 3.6s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .for-whom::before,
+      .for-whom__tag::before,
+      .for-whom__headline,
+      .for-whom__check {
+        animation: none;
+      }
+      .for-whom__list li {
+        transition: none;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [10] FINAL CTA
+    ════════════════════════════════════════════════════════════════ */
+    @keyframes cta-aurora {
+      0%   { transform: translate3d(-8%, -6%, 0) rotate(0deg);   }
+      50%  { transform: translate3d(6%,  4%, 0)  rotate(180deg); }
+      100% { transform: translate3d(-8%, -6%, 0) rotate(360deg); }
+    }
+
+    @keyframes cta-pulse {
+      0%, 100% { transform: scale(1);   opacity: 0.55; }
+      50%      { transform: scale(1.08); opacity: 0.8; }
+    }
+
+    @keyframes cta-glow {
+      0%, 100% { box-shadow: 0 22px 56px rgba(0, 0, 0, 0.32), 0 0 0 0 rgba(247, 236, 226, 0.0); }
+      50%      { box-shadow: 0 26px 64px rgba(0, 0, 0, 0.4),  0 0 0 14px rgba(247, 236, 226, 0.06); }
+    }
+
+    @keyframes cta-shine {
+      0%   { transform: translateX(-120%) skewX(-18deg); }
+      60%  { transform: translateX(180%)  skewX(-18deg); }
+      100% { transform: translateX(180%)  skewX(-18deg); }
+    }
+
+    @keyframes cta-headline-glow {
+      0%, 100% { text-shadow: 0 2px 30px rgba(0, 0, 0, 0.25); }
+      50%      { text-shadow: 0 2px 40px rgba(247, 236, 226, 0.18), 0 2px 30px rgba(0, 0, 0, 0.25); }
+    }
+
+    .cta-final {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      padding: 140px 0 132px;
+      text-align: center;
+      color: var(--color-white);
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(247, 236, 226, 0.18) 0%, transparent 60%),
+        linear-gradient(135deg, #d77b56 0%, #c46b4b 45%, #a45236 100%);
+    }
+
+    /* Camada aurora animada (gradientes em rotação) */
+    .cta-final::before {
+      content: '';
+      position: absolute;
+      inset: -30%;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(247, 236, 226, 0.25) 0%, transparent 35%),
+        radial-gradient(circle at 80% 70%, rgba(61, 86, 40, 0.32) 0%, transparent 38%),
+        radial-gradient(circle at 50% 50%, rgba(196, 107, 75, 0.0) 0%, transparent 60%);
+      filter: blur(40px);
+      animation: cta-aurora 18s linear infinite;
+      pointer-events: none;
+    }
+
+    /* Spotlight pulsante */
+    .cta-final::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 760px;
+      height: 760px;
+      max-width: 90vw;
+      max-height: 90vw;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      background: radial-gradient(circle, rgba(247, 236, 226, 0.18) 0%, transparent 60%);
+      animation: cta-pulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .cta-final .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-final__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      margin-bottom: 28px;
+    }
+
+    .cta-final__tag::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-cream);
+      box-shadow: 0 0 0 0 rgba(247, 236, 226, 0.65);
+      animation: cta-pulse 2.4s ease-in-out infinite;
+    }
+
+    .cta-final__headline {
+      font-size: clamp(32px, 5vw, 58px);
+      color: var(--color-white);
+      -webkit-text-stroke: 0;
+      max-width: 880px;
+      margin: 0 auto 24px;
+      line-height: 1.1;
+      animation: cta-headline-glow 5s ease-in-out infinite;
+    }
+
+    .cta-final__headline em {
+      font-style: italic;
+      color: var(--color-cream);
+    }
+
+    .cta-final__sub {
+      font-size: clamp(17px, 1.6vw, 21px);
+      font-weight: 400;
+      color: rgba(247, 236, 226, 0.95);
+      max-width: 580px;
+      margin: 0 auto 44px;
+      line-height: 1.65;
+    }
+
+    /* Botão CTA com brilho deslizante */
+    .cta-final__cta {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--color-dark);
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      padding: 22px 56px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      animation: cta-glow 3.4s ease-in-out infinite;
+    }
+
+    .cta-final__cta::after {
+      content: '→';
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-final__cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 50%, transparent 100%);
+      animation: cta-shine 3.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @media (hover: hover) {
+      .cta-final__cta:hover {
+        transform: translateY(-3px);
+        background: #2c3e1d;
+      }
+      .cta-final__cta:hover::after {
+        transform: translateX(4px);
+      }
+    }
+
+    /* Selos / chips de benefícios */
+    .cta-final__perks {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 36px;
+    }
+
+    .cta-final__perk {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(247, 236, 226, 0.95);
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .cta-final__perk::before {
+      content: '✓';
+      color: var(--color-cream);
+      font-weight: 700;
+    }
+
+    .cta-final__microcopy {
+      display: block;
+      margin-top: 28px;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(247, 236, 226, 0.85);
+      letter-spacing: 0.04em;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta-final::before,
+      .cta-final::after,
+      .cta-final__cta,
+      .cta-final__cta::before,
+      .cta-final__tag::before,
+      .cta-final__headline {
+        animation: none;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [11] FOOTER
+    ════════════════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--color-dark);
+      border-top: 1px solid var(--color-primary);
+      padding: 44px 0;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--color-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESPONSIVE — 768px (tablet)
+    ════════════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+
+      .navbar__inner {
+        padding: 14px 24px;
+      }
+
+      .navbar__logo img {
+        height: 18px;
+      }
+
+      /* Hero — conteúdo no rodapé da seção; topo livre ~350px para a arte mobile */
+      .hero {
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: stretch;
+        padding: 300px 0 72px;
+        /* IMAGEM MOBILE — substitua pelo caminho real */
+        background-image: url('mobile-bg.jpg');
+        background-position: center top;
+      }
+
+      .hero__content {
+        text-align: center;
+        max-width: 100%;
+      }
+
+      .hero__logo {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 130px;
+      }
+
+      .hero__cta-group {
+        align-items: center;
+      }
+
+      /* Headline mobile (≈20% menor que o bump +40%) */
+      .hero__headline {
+        font-size: clamp(38px, 4.5vw, 62px);
+        line-height: 1.12;
+      }
+
+      /* About */
+      .about__grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .about__photo {
+        max-width: 300px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      /* Before/after — caderno empilha vertical */
+      .ba-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .ba-divider {
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg,
+          rgba(0, 0, 0, 0.18) 0%,
+          rgba(0, 0, 0, 0.08) 50%,
+          rgba(0, 0, 0, 0.18) 100%);
+        box-shadow:
+          0 -6px 14px -6px rgba(0, 0, 0, 0.18),
+          0  6px 14px -6px rgba(0, 0, 0, 0.18);
+      }
+
+      .ba-col {
+        padding: 44px 30px;
+      }
+
+      /* Mechanism pillars — 2 colunas no tablet */
+      .pillars {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .pillar:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        max-width: calc(50% - 8px);
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
+
+      /* Equipment grid */
+      .equipment__grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Curriculum: empilha texto e placeholder */
+      .curriculum__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .curriculum__image {
+        aspect-ratio: 16 / 10;
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      /* For-whom: lista vira coluna única */
+      .for-whom__list {
+        grid-template-columns: 1fr;
+      }
+
+      .for-whom__list li:last-child:nth-child(odd) {
+        max-width: 100%;
+        margin: 0;
+      }
+
+      /* Pain: bullets viram uma coluna */
+      .pain__list {
+        grid-template-columns: 1fr;
+      }
+
+      /* Bonus: items em 2 colunas */
+      .bonus__item {
+        flex: 0 1 calc(50% - 8px);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESPONSIVE — 480px (mobile)
+    ════════════════════════════════════════════════════════════════ */
+    @media (max-width: 480px) {
+      .hero {
+        padding: 350px 0 64px;
+      }
+      .pain { padding: 40px 0 88px; }
+      .mechanism, .curriculum,
+      .about, .equipment, .transformation,
+      .bonus, .for-whom, .cta-final { padding: 88px 0; }
+
+      /* Título da seção dor: exatamente duas linhas (uma frase por linha) */
+      .pain__headline {
+        font-size: clamp(26px, 7vw, 40px);
+      }
+
+      .btn--primary { padding: 16px 28px; font-size: 14px; }
+      .btn--dark { padding: 18px 36px; font-size: 15px; }
+
+      /* Bonus: items em coluna única */
+      .bonus__item { flex: 0 1 100%; }
+
+      /* Mechanism pillars — 2 colunas no mobile */
+      .pillars {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .pillar {
+        min-height: 130px;
+        padding: 20px 12px;
+      }
+
+      .pillar__title {
+        font-size: 15px;
+      }
+
+      .pillar:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        max-width: calc(50% - 6px);
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
+
+      /* Pain__contrast: padding reduzido + aspas menores */
+      .pain__contrast {
+        padding: 32px 28px;
+        font-size: 16px;
+      }
+      .pain__contrast::before {
+        font-size: 80px;
+        left: 16px;
+        top: -4px;
+      }
+
+      .cta-final { padding: 96px 0 88px; }
+      .cta-final__sub { font-size: 17px; }
+      .cta-final__cta {
+        padding: 20px 40px;
+        font-size: 15px;
+        width: 100%;
+        max-width: 360px;
+      }
+      .cta-final__perks {
+        margin-top: 28px;
+      }
+      .cta-final__perk {
+        font-size: 12px;
+        padding: 7px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVBAR — aparece após 80px de scroll
+  ════════════════════════════════════════════════════════════ -->
+  <nav class="navbar" id="js-navbar" aria-label="Navegação">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__logo" aria-label="Studio Leh Crafts — Laboratório de Encadernação">
+        <img src="logo.png" alt="Studio Leh Crafts — Laboratório de Encadernação" />
+      </a>
+      <a href="#" class="btn btn--nav">Grupo VIP</a>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [1] HERO
+  ════════════════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="container">
+
+      <div class="hero__content">
+        <img class="hero__logo fade-in" src="logo.png" alt="Studio Leh Crafts — Laboratório de Encadernação" />
+
+        <h1 class="hero__headline fade-in d-1">
+          Transforme sua encadernação artesanal em peças com <em style="font-style:italic;color:#6c7a3a;">acabamento de coleção.</em>
+        </h1>
+
+        <p class="hero__subheadline fade-in d-2">
+          Aprenda a criar um kit completo de papelaria premium com a técnica Sewn Boards Binding,
+          uma estrutura sofisticada, com abertura 180° e acabamento profissional que diferencia
+          suas peças do artesanal comum.
+        </p>
+
+        <div class="hero__cta-group fade-in d-3">
+          <a href="#" class="btn btn--primary">Entrar no Grupo VIP da Aula de Abertura</a>
+          <p class="hero__microcopy">
+            Acesso gratuito ao grupo + aviso prioritário da aula ao vivo em 05/06.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [2] IDENTIFICAÇÃO DA DOR
+  ════════════════════════════════════════════════════════════ -->
+  <section class="pain" aria-labelledby="pain-headline">
+    <div class="container">
+      <div class="pain__inner">
+
+        <span class="section-tag section-tag--light fade-in">O problema</span>
+
+        <h2 class="pain__headline fade-in d-1" id="pain-headline">
+          <span class="pain__headline-line">O problema não é falta de talento.</span>
+          <span class="pain__headline-line">É falta de <em class="headline-em">acabamento profissional.</em></span>
+        </h2>
+
+        <p class="pain__copy fade-in d-2">
+          Muitos artesãos passam horas criando peças bonitas…<br>
+          mas continuam presas em produtos que parecem "mais do mesmo".
+        </p>
+
+        <span class="label-upper pain__result-label fade-in">O resultado?</span>
+
+        <ul class="pain__list">
+          <li class="fade-in d-1">dificuldade para cobrar mais caro</li>
+          <li class="fade-in d-2">clientes comparando apenas por preço</li>
+          <li class="fade-in d-3">peças sem identidade premium</li>
+          <li class="fade-in d-4">acabamento que não transmite valor</li>
+          <li class="fade-in d-5">sensação de estagnação criativa</li>
+        </ul>
+
+        <p class="pain__contrast fade-in">
+          Porque existe uma diferença enorme entre fazer encadernação artesanal…<br>
+          e criar produtos que parecem peças editoriais de coleção.
+        </p>
+
+        <p class="pain__close fade-in">
+          E essa diferença está na estrutura, no acabamento e na técnica.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [3] MECANISMO — Sewn Boards Binding
+  ════════════════════════════════════════════════════════════ -->
+  <section class="mechanism" aria-labelledby="mechanism-headline">
+    <div class="container">
+
+      <div class="mechanism__header">
+        <span class="section-tag section-tag--dark fade-in">A técnica</span>
+        <h2 class="mechanism__headline fade-in d-1" id="mechanism-headline">
+          A técnica Sewn Boards Binding muda completamente a <em class="headline-em headline-em--cream">percepção da sua peça.</em>
+        </h2>
+        <p class="mechanism__sub fade-in d-2">Uma estrutura clássica e sofisticada que une:</p>
+      </div>
+
+      <!-- 5 Pilares -->
+      <div class="pillars">
+        <div class="pillar fade-in">
+          <span class="pillar__number">I</span>
+          <span class="pillar__title">Abertura 180°</span>
+        </div>
+        <div class="pillar fade-in d-1">
+          <span class="pillar__number">II</span>
+          <span class="pillar__title">Acabamento refinado</span>
+        </div>
+        <div class="pillar fade-in d-2">
+          <span class="pillar__number">III</span>
+          <span class="pillar__title">Visual minimalista</span>
+        </div>
+        <div class="pillar fade-in d-3">
+          <span class="pillar__number">IV</span>
+          <span class="pillar__title">Costura aparente elegante</span>
+        </div>
+        <div class="pillar fade-in d-4">
+          <span class="pillar__number">V</span>
+          <span class="pillar__title">Construção premium</span>
+        </div>
+      </div>
+
+      <span class="divider fade-in"></span>
+
+      <!-- Bullets de resultado -->
+      <ul class="result-list">
+        <li class="fade-in">
+          <span class="result-list__check">✓</span>
+          <span>possuem presença visual sofisticada</span>
+        </li>
+        <li class="fade-in d-1">
+          <span class="result-list__check">✓</span>
+          <span>transmitem valor logo no primeiro contato</span>
+        </li>
+        <li class="fade-in d-2">
+          <span class="result-list__check">✓</span>
+          <span>fogem do padrão artesanal comum</span>
+        </li>
+        <li class="fade-in d-3">
+          <span class="result-list__check">✓</span>
+          <span>permitem construir coleções autorais</span>
+        </li>
+        <li class="fade-in d-4">
+          <span class="result-list__check">✓</span>
+          <span>aumentam a percepção premium do seu trabalho</span>
+        </li>
+      </ul>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [4] O QUE SERÁ ENSINADO
+  ════════════════════════════════════════════════════════════ -->
+  <section class="curriculum" aria-labelledby="curriculum-headline">
+    <div class="container">
+      <div class="curriculum__grid">
+
+        <div class="curriculum__text">
+          <div class="curriculum__header">
+            <span class="section-tag section-tag--light fade-in">O que você vai aprender</span>
+            <h2 class="curriculum__headline fade-in d-1" id="curriculum-headline">
+              Você vai aprender a desenvolver uma <em class="headline-em">coleção completa</em> de encadernação premium.
+            </h2>
+            <p class="curriculum__copy fade-in d-2">
+              Durante o Laboratório Sewn Boards, Leandro Mendes vai ensinar passo a passo
+              a construção de um kit coordenado de papelaria artesanal de alto padrão.
+            </p>
+          </div>
+
+          <div class="kit-showcase fade-in">
+            <div class="kit-card">
+              <span class="kit-card__number">01</span>
+              <span class="kit-card__title">Caderno artesanal premium</span>
+            </div>
+            <div class="kit-card">
+              <span class="kit-card__number">02</span>
+              <span class="kit-card__title">Pasta de documentos coordenada</span>
+            </div>
+            <div class="kit-card">
+              <span class="kit-card__number">03</span>
+              <span class="kit-card__title">Envelope com papel de carta</span>
+            </div>
+            <div class="kit-card">
+              <span class="kit-card__number">04</span>
+              <span class="kit-card__title">Marca-página</span>
+            </div>
+            <div class="kit-card">
+              <span class="kit-card__number">05</span>
+              <span class="kit-card__title">Card da coleção</span>
+            </div>
+          </div>
+
+          <p class="curriculum__close fade-in">
+            Tudo pensado para criar uma linha visual coesa, sofisticada e com valor percebido elevado.
+          </p>
+        </div>
+
+        <aside class="curriculum__media fade-in d-1">
+          <img class="curriculum__image" src="curriculum-kit.jpg" alt="Caderno artesanal premium feito com a técnica Sewn Boards" />
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [5] SOBRE LEANDRO MENDES
+  ════════════════════════════════════════════════════════════ -->
+  <section class="about" aria-labelledby="about-headline">
+    <div class="container">
+      <div class="about__grid">
+
+        <!-- Foto do Leandro -->
+        <div class="about__photo fade-in">
+          <img src="leh.jpg" alt="Retrato de Leandro Mendes Macedo — Studio Leh Crafts" />
+        </div>
+
+        <!-- Texto -->
+        <div class="about__content">
+          <span class="section-tag section-tag--dark fade-in">O professor</span>
+          <h2 class="about__headline fade-in d-1" id="about-headline">
+            Conheça <em class="headline-em headline-em--cream">seu professor.</em>
+          </h2>
+
+          <p class="about__copy fade-in d-2">
+            Leandro Mendes Macedo é artesão, professor e fundador do Studio Leh Crafts.
+            Sua trajetória foi construída dentro da prática da encadernação, atuando
+            inicialmente em oficinas de pequeno e médio porte, onde desenvolveu experiência
+            em produção, organização de processos, acabamento e controle de qualidade.
+          </p>
+
+          <p class="about__copy fade-in d-3">
+            Com o passar dos anos, levou esse conhecimento para o universo da encadernação
+            artesanal, aprofundando-se nas necessidades reais de artesãos e papeleiras que
+            desejam transformar seus ateliês em negócios estruturados e valorizados.
+          </p>
+
+          <p class="about__copy fade-in d-4">
+            Hoje, Leandro une técnica, prática e posicionamento profissional para ajudar
+            artesãs a criarem papelarias que encantam, organizarem seus processos produtivos
+            e desenvolverem produtos com mais valor dentro da economia criativa.
+          </p>
+
+          <p class="about__close fade-in d-5">
+            Fundador do Studio Leh Crafts, já impactou milhares de alunas em todo o Brasil
+            por meio de um método baseado na prática, repetição e consistência — pilares
+            que acredita serem essenciais para dominar a encadernação artesanal com
+            excelência, cuidado e identidade em cada peça.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [6] EQUIPAMENTOS (Objeção)
+  ════════════════════════════════════════════════════════════ -->
+  <section class="equipment" aria-labelledby="equipment-headline">
+    <div class="container">
+
+      <div class="equipment__center">
+        <span class="section-tag section-tag--light fade-in">Objeção comum</span>
+        <h2 class="equipment__headline fade-in d-1" id="equipment-headline">
+          "Mas eu preciso ter um ateliê profissional para conseguir fazer isso?"
+        </h2>
+        <span class="equipment__no fade-in d-2">Não.</span>
+        <p class="equipment__copy fade-in d-3">
+          Embora Leandro utilize equipamentos profissionais em seu próprio ateliê,
+          o método ensinado no Laboratório foi pensado para a realidade da encadernação artesanal.
+        </p>
+      </div>
+
+      <!-- 4 cards 2×2 -->
+      <div class="equipment__grid">
+
+        <div class="equipment__card fade-in">
+          <svg class="equipment__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="equipment__card-title">Adaptações viáveis</span>
+        </div>
+
+        <div class="equipment__card fade-in d-1">
+          <svg class="equipment__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span class="equipment__card-title">Soluções acessíveis</span>
+        </div>
+
+        <div class="equipment__card fade-in d-2">
+          <svg class="equipment__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+          </svg>
+          <span class="equipment__card-title">Técnicas aplicáveis ao ateliê artesanal</span>
+        </div>
+
+        <div class="equipment__card fade-in d-3">
+          <svg class="equipment__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          <span class="equipment__card-title">Processos que priorizam acabamento e estrutura</span>
+        </div>
+
+      </div>
+
+      <div class="equipment__close fade-in">
+        <p>"O foco não é ter máquinas industriais."</p>
+        <p>"O foco é aprender a pensar e construir como uma encadernação profissional."</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [7] TRANSFORMAÇÃO — Antes × Depois
+  ════════════════════════════════════════════════════════════ -->
+  <section class="transformation" aria-labelledby="transformation-headline">
+    <div class="container">
+
+      <div class="transformation__header">
+        <span class="section-tag section-tag--dark fade-in">Antes × Depois</span>
+        <h2 class="transformation__headline fade-in d-1" id="transformation-headline">
+          O acabamento <em class="headline-em headline-em--cream">muda tudo.</em>
+        </h2>
+      </div>
+
+      <div class="ba-wrapper">
+
+        <!-- Antes -->
+        <div class="ba-col ba-col--before fade-in">
+          <span class="ba-col__title">Antes</span>
+          <ul class="ba-list">
+            <li><span class="ba-icon">✕</span><span>peças bonitas, mas comuns</span></li>
+            <li><span class="ba-icon">✕</span><span>dificuldade para cobrar valor justo</span></li>
+            <li><span class="ba-icon">✕</span><span>sensação de estar "fazendo mais do mesmo"</span></li>
+            <li><span class="ba-icon">✕</span><span>produtos sem identidade premium</span></li>
+          </ul>
+        </div>
+
+        <div class="ba-divider" aria-hidden="true"></div>
+
+        <!-- Depois -->
+        <div class="ba-col ba-col--after fade-in d-2">
+          <span class="ba-col__title">Depois</span>
+          <ul class="ba-list">
+            <li><span class="ba-icon">✓</span><span>peças sofisticadas e autorais</span></li>
+            <li><span class="ba-icon">✓</span><span>acabamento com presença profissional</span></li>
+            <li><span class="ba-icon">✓</span><span>maior percepção de valor</span></li>
+            <li><span class="ba-icon">✓</span><span>coleção coerente e refinada</span></li>
+            <li><span class="ba-icon">✓</span><span>segurança técnica para criar produtos premium</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [8] BÔNUS
+  ════════════════════════════════════════════════════════════ -->
+  <section class="bonus" aria-labelledby="bonus-headline">
+    <div class="container">
+
+      <span class="section-tag section-tag--light fade-in">Bônus exclusivo</span>
+
+      <h2 class="bonus__headline fade-in d-1" id="bonus-headline">
+        Além das aulas, você recebe os <em class="headline-em">gabaritos técnicos</em> utilizados no processo.
+      </h2>
+
+      <p class="bonus__copy fade-in d-2">
+        Você terá acesso aos moldes e estruturas utilizados na construção dos
+        produtos ensinados durante o Laboratório.
+      </p>
+
+      <div class="bonus__items">
+
+        <div class="bonus__item fade-in">
+          <svg class="bonus__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span class="bonus__item-text">Execução mais rápida</span>
+        </div>
+
+        <div class="bonus__item fade-in d-1">
+          <svg class="bonus__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="bonus__item-text">Precisão garantida</span>
+        </div>
+
+        <div class="bonus__item fade-in d-2">
+          <svg class="bonus__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          <span class="bonus__item-text">Repetibilidade</span>
+        </div>
+
+        <div class="bonus__item fade-in d-3">
+          <svg class="bonus__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+          <span class="bonus__item-text">Padronização do acabamento</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [9] PARA QUEM É
+  ════════════════════════════════════════════════════════════ -->
+  <section class="for-whom" aria-labelledby="for-whom-headline">
+    <div class="container">
+
+      <div class="for-whom__header">
+        <span class="for-whom__tag fade-in">Para você</span>
+        <h2 class="for-whom__headline fade-in d-1" id="for-whom-headline">
+          Para artesãos que sabem que o acabamento define o <em>valor da peça.</em>
+        </h2>
+        <p class="for-whom__sub fade-in d-2">
+          Se você se identifica com algum desses perfis, o Laboratório Sewn Boards foi feito para você.
+        </p>
+      </div>
+
+      <ul class="for-whom__list">
+        <li class="fade-in">
+          <span class="for-whom__check" aria-hidden="true">✓</span>
+          <span>iniciantes que querem começar já com estrutura profissional</span>
+        </li>
+        <li class="fade-in d-1">
+          <span class="for-whom__check" aria-hidden="true">✓</span>
+          <span>artesãos que desejam sair do artesanal comum</span>
+        </li>
+        <li class="fade-in d-2">
+          <span class="for-whom__check" aria-hidden="true">✓</span>
+          <span>papeleiras que querem cobrar mais pelas próprias peças</span>
+        </li>
+        <li class="fade-in d-3">
+          <span class="for-whom__check" aria-hidden="true">✓</span>
+          <span>criadoras autorais que buscam diferenciação estética</span>
+        </li>
+        <li class="fade-in d-4">
+          <span class="for-whom__check" aria-hidden="true">✓</span>
+          <span>quem deseja transformar técnica em valor percebido</span>
+        </li>
+      </ul>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [10] CTA FINAL
+  ════════════════════════════════════════════════════════════ -->
+  <section class="cta-final" aria-labelledby="cta-final-headline">
+    <div class="container">
+
+      <span class="cta-final__tag fade-in">Vagas limitadas</span>
+
+      <h2 class="cta-final__headline fade-in d-1" id="cta-final-headline">
+        Existe uma diferença entre produzir peças artesanais…<br>
+        e criar produtos que as pessoas <em>desejam guardar.</em>
+      </h2>
+
+      <p class="cta-final__sub fade-in d-2">
+        Entre para o Grupo VIP e participe da aula de abertura
+        do Laboratório Sewn Boards.
+      </p>
+
+      <a href="#" class="cta-final__cta fade-in d-3">Entrar no Grupo VIP</a>
+
+      <div class="cta-final__perks fade-in d-4" aria-hidden="true">
+        <span class="cta-final__perk">Acesso gratuito ao grupo</span>
+        <span class="cta-final__perk">Aviso prioritário da aula</span>
+        <span class="cta-final__perk">Conteúdos exclusivos</span>
+      </div>
+
+      <span class="cta-final__microcopy fade-in d-5">
+        Vagas limitadas para acesso ao grupo e aviso prioritário da abertura.
+      </span>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       [11] FOOTER
+  ════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Studio Leh Crafts — Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       JAVASCRIPT
+  ════════════════════════════════════════════════════════════ -->
+  <script>
+    'use strict';
+
+    /* ── Navbar: aparece após 80px de scroll ── */
+    const navbar = document.getElementById('js-navbar');
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 80) {
+        navbar.classList.add('is-visible');
+      } else {
+        navbar.classList.remove('is-visible');
+      }
+    }, { passive: true });
+
+
+    /* ── Intersection Observer: fade-in com stagger ── */
+    const observerOptions = {
+      threshold: 0.10,
+      rootMargin: '0px 0px -48px 0px'
+    };
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          /* Não desconectar — mantém o estado "visível" */
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(function (el) {
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
