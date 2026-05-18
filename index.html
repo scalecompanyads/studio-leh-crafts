@@ -326,14 +326,6 @@
     .d-4 { transition-delay: 0.40s; }
     .d-5 { transition-delay: 0.50s; }
 
-    /* ═══════════════════════════════════════════════════════════════
-       SHARED — Section Tag (pílula editorial)
-    ════════════════════════════════════════════════════════════════ */
-    @keyframes dot-pulse {
-      0%, 100% { transform: scale(1);    opacity: 0.6; }
-      50%      { transform: scale(1.25); opacity: 1;   }
-    }
-
     @keyframes headline-glow {
       0%, 100% { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.2); }
       50%      { text-shadow: 0 1px 24px rgba(196, 107, 75, 0.25), 0 1px 14px rgba(0, 0, 0, 0.2); }
@@ -345,46 +337,6 @@
       100% { transform: translate3d(-6%, -4%, 0) rotate(360deg); }
     }
 
-    .section-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      border-radius: 999px;
-      margin-bottom: 22px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-
-    .section-tag::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      animation: dot-pulse 2.4s ease-in-out infinite;
-    }
-
-    /* Variante para fundo claro (cream) */
-    .section-tag--light {
-      color: var(--color-primary);
-      background: rgba(196, 107, 75, 0.1);
-      border: 1px solid rgba(196, 107, 75, 0.35);
-    }
-    .section-tag--light::before { background: var(--color-primary); }
-
-    /* Variante para fundo escuro (verde) */
-    .section-tag--dark {
-      color: var(--color-cream);
-      background: rgba(196, 107, 75, 0.18);
-      border: 1px solid rgba(196, 107, 75, 0.45);
-    }
-    .section-tag--dark::before { background: var(--color-primary); }
-
     /* Destaque dentro de headlines */
     .headline-em {
       font-style: italic;
@@ -392,10 +344,6 @@
     }
     .headline-em--cream {
       color: var(--color-cream);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .section-tag::before { animation: none; }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -636,6 +584,84 @@
       font-size: 17px;
       font-weight: 600;
       color: var(--color-dark);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [2b] NOT NEEDED — Para começar
+    ════════════════════════════════════════════════════════════════ */
+    .not-needed {
+      position: relative;
+      background: var(--color-white);
+      padding: 88px 0 100px;
+      border-top: 1px solid rgba(61, 86, 40, 0.08);
+    }
+
+    .not-needed__inner {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .not-needed__headline {
+      font-size: clamp(24px, 3.2vw, 38px);
+      color: var(--color-dark);
+      -webkit-text-stroke: 0;
+      margin-bottom: 40px;
+      line-height: 1.25;
+    }
+
+    .not-needed__list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      text-align: left;
+    }
+
+    .not-needed__list li {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-dark);
+      padding: 20px 22px;
+      background: var(--color-cream);
+      border: 1px solid rgba(146, 119, 111, 0.2);
+      border-radius: 12px;
+      line-height: 1.5;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .not-needed__mark {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(196, 107, 75, 0.12);
+      border: 1px solid rgba(196, 107, 75, 0.35);
+      color: var(--color-primary);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .not-needed__list li:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: calc(50% - 7px);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    @media (hover: hover) {
+      .not-needed__list li:hover {
+        transform: translateY(-3px);
+        border-color: rgba(196, 107, 75, 0.4);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -1389,10 +1415,6 @@
 
     .bonus .container { position: relative; z-index: 1; }
 
-    .bonus__tag {
-      display: none;
-    }
-
     .bonus__headline {
       font-size: clamp(26px, 3.2vw, 40px);
       max-width: 660px;
@@ -1539,34 +1561,6 @@
       margin-bottom: 56px;
     }
 
-    .for-whom__tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-cream);
-      padding: 8px 18px;
-      border-radius: 999px;
-      background: rgba(196, 107, 75, 0.18);
-      border: 1px solid rgba(196, 107, 75, 0.45);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      margin-bottom: 22px;
-    }
-
-    .for-whom__tag::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--color-primary);
-      animation: cta-pulse 2.4s ease-in-out infinite;
-    }
-
     .for-whom__headline {
       font-size: clamp(28px, 4vw, 48px);
       color: var(--color-white);
@@ -1670,7 +1664,6 @@
 
     @media (prefers-reduced-motion: reduce) {
       .for-whom::before,
-      .for-whom__tag::before,
       .for-whom__headline,
       .for-whom__check {
         animation: none;
@@ -1757,35 +1750,6 @@
     .cta-final .container {
       position: relative;
       z-index: 1;
-    }
-
-    .cta-final__tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-white);
-      padding: 8px 18px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      margin-bottom: 28px;
-    }
-
-    .cta-final__tag::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--color-cream);
-      box-shadow: 0 0 0 0 rgba(247, 236, 226, 0.65);
-      animation: cta-pulse 2.4s ease-in-out infinite;
     }
 
     .cta-final__headline {
@@ -1907,9 +1871,120 @@
       .cta-final::after,
       .cta-final__cta,
       .cta-final__cta::before,
-      .cta-final__tag::before,
       .cta-final__headline {
         animation: none;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [10b] FAQ
+    ════════════════════════════════════════════════════════════════ */
+    .faq {
+      position: relative;
+      background:
+        radial-gradient(ellipse 55% 40% at 50% 100%, rgba(196, 107, 75, 0.07) 0%, transparent 55%),
+        var(--color-cream);
+      padding: 100px 0 108px;
+    }
+
+    .faq__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .faq__headline {
+      font-size: clamp(28px, 3.5vw, 44px);
+      color: var(--color-dark);
+      -webkit-text-stroke: 0;
+      paint-order: normal;
+      line-height: 1.2;
+    }
+
+    .faq__list {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq__item {
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(146, 119, 111, 0.22);
+      background: var(--color-white);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq__item[open] {
+      border-color: rgba(196, 107, 75, 0.45);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .faq__question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      list-style: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: clamp(15px, 1.5vw, 17px);
+      font-weight: 600;
+      color: var(--color-dark);
+      line-height: 1.45;
+      padding: 22px 24px;
+      user-select: none;
+    }
+
+    .faq__question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq__question::marker {
+      content: '';
+    }
+
+    .faq__icon {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(196, 107, 75, 0.12);
+      border: 1px solid rgba(196, 107, 75, 0.35);
+      color: var(--color-primary);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1;
+      transition: transform 0.35s ease, background 0.35s ease;
+    }
+
+    .faq__item[open] .faq__icon {
+      transform: rotate(45deg);
+      background: rgba(196, 107, 75, 0.2);
+    }
+
+    .faq__answer {
+      padding: 0 24px 22px;
+    }
+
+    .faq__answer p {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--color-muted);
+      line-height: 1.75;
+      margin: 0;
+      border-top: 1px solid rgba(146, 119, 111, 0.15);
+      padding-top: 18px;
+    }
+
+    @media (hover: hover) {
+      .faq__item:not([open]):hover {
+        border-color: rgba(196, 107, 75, 0.35);
       }
     }
 
@@ -2049,6 +2124,15 @@
         flex: 0 1 calc(50% - 7px);
       }
 
+      .not-needed__list {
+        grid-template-columns: 1fr;
+      }
+
+      .not-needed__list li:last-child:nth-child(odd) {
+        max-width: 100%;
+        margin: 0;
+      }
+
       /* Bonus: items em 2 colunas */
       .bonus__item {
         flex: 0 1 calc(50% - 8px);
@@ -2063,9 +2147,10 @@
         padding: 350px 0 64px;
       }
       .pain { padding: 40px 0 88px; }
+      .not-needed { padding: 64px 0 72px; }
       .mechanism, .curriculum,
       .about, .equipment, .transformation,
-      .bonus, .for-whom, .cta-final { padding: 88px 0; }
+      .bonus, .for-whom, .faq, .cta-final { padding: 88px 0; }
 
       /* Título da seção dor: exatamente duas linhas (uma frase por linha) */
       .pain__headline {
@@ -2147,7 +2232,7 @@
         <img class="hero__logo fade-in" src="logo.png" alt="Studio Leh Crafts — Laboratório de Encadernação" />
 
         <h1 class="hero__headline fade-in d-1">
-          Transforme sua encadernação artesanal em peças com <em style="font-style:italic;color:#6c7a3a;">acabamento de coleção.</em>
+          Aprenda a montar um kit completo de papelaria artesanal premium começando do zero, sem material caro e sem ateliê.
         </h1>
 
         <p class="hero__subheadline fade-in d-2">
@@ -2175,11 +2260,9 @@
     <div class="container">
       <div class="pain__inner">
 
-        <span class="section-tag section-tag--light fade-in">O problema</span>
-
         <h2 class="pain__headline fade-in d-1" id="pain-headline">
           <span class="pain__headline-line">O problema não é falta de talento.</span>
-          <span class="pain__headline-line">É falta de <em class="headline-em">acabamento profissional.</em></span>
+          <span class="pain__headline-line">É falta de acompanhamento profissional e metodologia com o passo a passo.</span>
         </h2>
 
         <p class="pain__copy fade-in d-2">
@@ -2217,13 +2300,51 @@
 
 
   <!-- ═══════════════════════════════════════════════════════════
+       [2b] PARA COMEÇAR — o que você não precisa
+  ════════════════════════════════════════════════════════════ -->
+  <section class="not-needed" aria-labelledby="not-needed-headline">
+    <div class="container">
+      <div class="not-needed__inner">
+
+        <h2 class="not-needed__headline fade-in" id="not-needed-headline">
+          Para começar, você não precisa de:
+        </h2>
+
+        <ul class="not-needed__list">
+          <li class="fade-in d-1">
+            <span class="not-needed__mark" aria-hidden="true">✗</span>
+            Experiência prévia em encadernação
+          </li>
+          <li class="fade-in d-2">
+            <span class="not-needed__mark" aria-hidden="true">✗</span>
+            Máquinas industriais, prensas ou ferramentas raras
+          </li>
+          <li class="fade-in d-3">
+            <span class="not-needed__mark" aria-hidden="true">✗</span>
+            Material importado ou caro
+          </li>
+          <li class="fade-in d-4">
+            <span class="not-needed__mark" aria-hidden="true">✗</span>
+            Ateliê montado
+          </li>
+          <li class="fade-in d-5">
+            <span class="not-needed__mark" aria-hidden="true">✗</span>
+            "Dom" — precisa de método
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
        [3] MECANISMO — Sewn Boards Binding
   ════════════════════════════════════════════════════════════ -->
   <section class="mechanism" aria-labelledby="mechanism-headline">
     <div class="container">
 
       <div class="mechanism__header">
-        <span class="section-tag section-tag--dark fade-in">A técnica</span>
         <h2 class="mechanism__headline fade-in d-1" id="mechanism-headline">
           A técnica Sewn Boards Binding muda completamente a <em class="headline-em headline-em--cream">percepção da sua peça.</em>
         </h2>
@@ -2298,7 +2419,6 @@
 
         <div class="curriculum__text">
           <div class="curriculum__header">
-            <span class="section-tag section-tag--light fade-in">O que você vai aprender</span>
             <h2 class="curriculum__headline fade-in d-1" id="curriculum-headline">
               Você vai aprender a desenvolver uma <em class="headline-em">coleção completa</em> de encadernação premium.
             </h2>
@@ -2363,7 +2483,6 @@
 
         <!-- Texto -->
         <div class="about__content">
-          <span class="section-tag section-tag--dark fade-in">O professor</span>
           <h2 class="about__headline fade-in d-1" id="about-headline">
             Conheça <em class="headline-em headline-em--cream">seu professor.</em>
           </h2>
@@ -2412,7 +2531,6 @@
     <div class="container">
 
       <div class="equipment__center">
-        <span class="section-tag section-tag--light fade-in">Objeção comum</span>
         <h2 class="equipment__headline fade-in d-1" id="equipment-headline">
           "Mas eu preciso ter um ateliê profissional para conseguir fazer isso?"
         </h2>
@@ -2477,7 +2595,6 @@
     <div class="container">
 
       <div class="transformation__header">
-        <span class="section-tag section-tag--dark fade-in">Antes × Depois</span>
         <h2 class="transformation__headline fade-in d-1" id="transformation-headline">
           O acabamento <em class="headline-em headline-em--cream">muda tudo.</em>
         </h2>
@@ -2526,8 +2643,6 @@
   ════════════════════════════════════════════════════════════ -->
   <section class="bonus" aria-labelledby="bonus-headline">
     <div class="container">
-
-      <span class="section-tag section-tag--light fade-in">Bônus exclusivo</span>
 
       <h2 class="bonus__headline fade-in d-1" id="bonus-headline">
         Além das aulas, você recebe os <em class="headline-em">gabaritos técnicos</em> utilizados no processo.
@@ -2586,7 +2701,6 @@
     <div class="container">
 
       <div class="for-whom__header">
-        <span class="for-whom__tag fade-in">Para você</span>
         <h2 class="for-whom__headline fade-in d-1" id="for-whom-headline">
           Para artesãos que sabem que o acabamento define o <em>valor da peça.</em>
         </h2>
@@ -2623,12 +2737,66 @@
 
 
   <!-- ═══════════════════════════════════════════════════════════
+       [10b] FAQ
+  ════════════════════════════════════════════════════════════ -->
+  <section class="faq" aria-labelledby="faq-headline">
+    <div class="container">
+
+      <header class="faq__header">
+        <h2 class="faq__headline fade-in" id="faq-headline">Perguntas frequentes.</h2>
+      </header>
+
+      <div class="faq__list">
+        <details class="faq__item fade-in d-1">
+          <summary class="faq__question">
+            Eu nunca fiz encadernação na vida. Vou conseguir acompanhar?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq__answer">
+            <p>Sim. A aula começa do zero absoluto, sem pré-requisitos.</p>
+          </div>
+        </details>
+
+        <details class="faq__item fade-in d-2">
+          <summary class="faq__question">
+            Preciso ter ateliê ou ferramentas profissionais?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq__answer">
+            <p>Não. O método foi pensado pro ateliê artesanal, com material acessível.</p>
+          </div>
+        </details>
+
+        <details class="faq__item fade-in d-3">
+          <summary class="faq__question">
+            A aula é paga?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq__answer">
+            <p>Não. A aula de abertura em 05/06 é gratuita. O Grupo VIP garante seu aviso prioritário.</p>
+          </div>
+        </details>
+
+        <details class="faq__item fade-in d-4">
+          <summary class="faq__question">
+            O que acontece depois do Grupo VIP?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq__answer">
+            <p>Você recebe conteúdos preparatórios e o link da aula ao vivo no dia 05/06. Sem compromisso de compra.</p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
        [10] CTA FINAL
   ════════════════════════════════════════════════════════════ -->
   <section class="cta-final" aria-labelledby="cta-final-headline">
     <div class="container">
-
-      <span class="cta-final__tag fade-in">Vagas limitadas</span>
 
       <h2 class="cta-final__headline fade-in d-1" id="cta-final-headline">
         Existe uma diferença entre produzir peças artesanais…<br>
