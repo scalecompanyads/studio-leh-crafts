@@ -57,10 +57,10 @@ export default function Pain() {
           </FadeIn>
 
           {/* Pain cards — grade 3 colunas */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-12 max-w-3xl mx-auto">
             {painItems.map((item, i) => (
               <FadeIn key={item} delay={220 + i * 60}>
-                <div className="relative overflow-hidden flex items-center gap-3 bg-white border border-dark/8 rounded-xl px-5 py-4 text-left shadow-card hover:-translate-y-0.5 hover:shadow-card-hover hover:border-primary/25 transition-all duration-300 h-full w-full sm:w-[calc(33.333%-8px)]">
+                <div className="relative overflow-hidden flex items-center gap-3 bg-white border border-dark/8 rounded-xl px-5 py-4 text-left shadow-card hover:-translate-y-0.5 hover:shadow-card-hover hover:border-primary/25 transition-all duration-300 h-full">
                   <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-xl bg-gradient-to-b from-primary to-primary/25" />
                   <span className="absolute top-2.5 right-3 font-headline text-[10px] font-bold tracking-widest text-primary/35">
                     0{i + 1}
