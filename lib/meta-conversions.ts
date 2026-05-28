@@ -1,10 +1,10 @@
 import type { NextRequest } from 'next/server'
 
-const META_PIXEL_ID = '978455578134970'
+export const META_PIXEL_ID = '978455578134970'
 const META_API_VERSION = 'v20.0'
 const META_ACCESS_TOKEN = process.env.META_CONVERSIONS_ACCESS_TOKEN
 
-type GroupTrackingData = {
+export type GroupTrackingData = {
   utmSource: string
   utmMedium: string
   utmCampaign: string
@@ -12,6 +12,9 @@ type GroupTrackingData = {
   utmTerm: string | null
   fullUrl: string
   fbclid: string | null
+  eventId?: string
+  fbp?: string | null
+  fbc?: string | null
 }
 
 function removeEmptyValues<T extends Record<string, unknown>>(value: T) {
@@ -40,8 +43,8 @@ export async function sendGrupoLeadEvent(
   }
 
   try {
-    const fbp = request.cookies.get('_fbp')?.value
-    const existingFbc = request.cookies.get('_fbc')?.value
+    const fbp = trackingData.fbp ?? request.cookies.get('_fbp')?.value
+    const existingFbc = trackingData.fbc ?? request.cookies.get('_fbc')?.value
     const generatedFbc = trackingData.fbclid ? `fb.1.${Date.now()}.${trackingData.fbclid}` : undefined
 
     const payload = {
@@ -49,7 +52,7 @@ export async function sendGrupoLeadEvent(
         {
           event_name: 'Lead',
           event_time: Math.floor(Date.now() / 1000),
-          event_id: crypto.randomUUID(),
+          event_id: trackingData.eventId ?? crypto.randomUUID(),
           action_source: 'website',
           event_source_url: trackingData.fullUrl,
           user_data: removeEmptyValues({
