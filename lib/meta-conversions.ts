@@ -1,5 +1,3 @@
-import type { NextRequest } from 'next/server'
-
 export const META_PIXEL_ID = '978455578134970'
 const META_API_VERSION = 'v20.0'
 const META_ACCESS_TOKEN = process.env.META_CONVERSIONS_ACCESS_TOKEN
@@ -17,24 +15,31 @@ export type GroupTrackingData = {
   fbc?: string | null
 }
 
+type MetaRequestContext = {
+  clientIpAddress?: string
+  clientUserAgent?: string
+  fbp?: string | null
+  fbc?: string | null
+}
+
 function removeEmptyValues<T extends Record<string, unknown>>(value: T) {
   return Object.fromEntries(
     Object.entries(value).filter(([, entry]) => entry !== null && entry !== undefined && entry !== ''),
   )
 }
 
-function getClientIp(request: NextRequest) {
-  const forwardedFor = request.headers.get('x-forwarded-for')
+function getClientIpFromHeaders(headers: Headers) {
+  const forwardedFor = headers.get('x-forwarded-for')
 
   if (forwardedFor) {
     return forwardedFor.split(',')[0]?.trim()
   }
 
-  return request.headers.get('x-real-ip') ?? undefined
+  return headers.get('x-real-ip') ?? undefined
 }
 
 export async function sendGrupoLeadEvent(
-  request: NextRequest,
+  context: MetaRequestContext,
   trackingData: GroupTrackingData,
 ) {
   if (!META_ACCESS_TOKEN) {
@@ -43,8 +48,8 @@ export async function sendGrupoLeadEvent(
   }
 
   try {
-    const fbp = trackingData.fbp ?? request.cookies.get('_fbp')?.value
-    const existingFbc = trackingData.fbc ?? request.cookies.get('_fbc')?.value
+    const fbp = trackingData.fbp ?? context.fbp
+    const existingFbc = trackingData.fbc ?? context.fbc
     const generatedFbc = trackingData.fbclid ? `fb.1.${Date.now()}.${trackingData.fbclid}` : undefined
 
     const payload = {
@@ -56,8 +61,8 @@ export async function sendGrupoLeadEvent(
           action_source: 'website',
           event_source_url: trackingData.fullUrl,
           user_data: removeEmptyValues({
-            client_ip_address: getClientIp(request),
-            client_user_agent: request.headers.get('user-agent') ?? undefined,
+            client_ip_address: context.clientIpAddress,
+            client_user_agent: context.clientUserAgent,
             fbp,
             fbc: existingFbc ?? generatedFbc,
           }),
@@ -93,5 +98,18 @@ export async function sendGrupoLeadEvent(
     }
   } catch (error) {
     console.error('Meta CAPI request errored', error)
+  }
+}
+
+export function getMetaRequestContext(input: {
+  headers: Headers
+  fbp?: string | null
+  fbc?: string | null
+}): MetaRequestContext {
+  return {
+    clientIpAddress: getClientIpFromHeaders(input.headers),
+    clientUserAgent: input.headers.get('user-agent') ?? undefined,
+    fbp: input.fbp,
+    fbc: input.fbc,
   }
 }

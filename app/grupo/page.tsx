@@ -1,8 +1,15 @@
 import Script from 'next/script'
 import { Suspense } from 'react'
+import { cookies, headers } from 'next/headers'
 import GrupoRedirect from '@/components/grupo/GrupoRedirect'
+import {
+  getMetaRequestContext,
+  sendGrupoLeadEvent,
+  type GroupTrackingData,
+} from '@/lib/meta-conversions'
 
 export const dynamic = 'force-dynamic'
+const WHATSAPP_GROUP_URL = 'https://chat.whatsapp.com/FGS2YZAmMPAEv1NvPKklJI'
 
 function LoadingState() {
   return (
@@ -17,7 +24,53 @@ function LoadingState() {
   )
 }
 
-export default function GrupoPage() {
+type GrupoPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}
+
+function getFirstValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value
+}
+
+export default async function GrupoPage({ searchParams }: GrupoPageProps) {
+  const resolvedSearchParams = await searchParams
+  const requestHeaders = await headers()
+  const cookieStore = await cookies()
+  const protocol = requestHeaders.get('x-forwarded-proto') ?? 'https'
+  const host = requestHeaders.get('x-forwarded-host') ?? requestHeaders.get('host')
+  const eventId = crypto.randomUUID()
+  const url = new URL('/grupo', `${protocol}://${host}`)
+
+  Object.entries(resolvedSearchParams).forEach(([key, value]) => {
+    const firstValue = getFirstValue(value)
+
+    if (firstValue) {
+      url.searchParams.set(key, firstValue)
+    }
+  })
+
+  const trackingData: GroupTrackingData = {
+    utmSource: getFirstValue(resolvedSearchParams.utm_source) ?? 'direto',
+    utmMedium: getFirstValue(resolvedSearchParams.utm_medium) ?? 'sem_medium',
+    utmCampaign: getFirstValue(resolvedSearchParams.utm_campaign) ?? 'sem_campanha',
+    utmContent: getFirstValue(resolvedSearchParams.utm_content) ?? null,
+    utmTerm: getFirstValue(resolvedSearchParams.utm_term) ?? null,
+    fullUrl: url.toString(),
+    fbclid: getFirstValue(resolvedSearchParams.fbclid) ?? null,
+    eventId,
+    fbp: cookieStore.get('_fbp')?.value ?? null,
+    fbc: cookieStore.get('_fbc')?.value ?? null,
+  }
+
+  await sendGrupoLeadEvent(
+    getMetaRequestContext({
+      headers: requestHeaders,
+      fbp: cookieStore.get('_fbp')?.value,
+      fbc: cookieStore.get('_fbc')?.value,
+    }),
+    trackingData,
+  )
+
   return (
     <>
       <Script id="meta-pixel-base" strategy="afterInteractive">
@@ -46,7 +99,10 @@ export default function GrupoPage() {
       </noscript>
 
       <Suspense fallback={<LoadingState />}>
-        <GrupoRedirect />
+        <GrupoRedirect
+          eventId={eventId}
+          whatsappGroupUrl={WHATSAPP_GROUP_URL}
+        />
       </Suspense>
     </>
   )
