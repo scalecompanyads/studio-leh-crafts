@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { sendGrupoLeadEvent } from '@/lib/meta-conversions'
 
 const WHATSAPP_GROUP_URL = 'https://chat.whatsapp.com/FGS2YZAmMPAEv1NvPKklJI'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
-export function GET(request: NextRequest) {
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
 
   const trackingData = {
@@ -14,9 +16,11 @@ export function GET(request: NextRequest) {
     utmContent: searchParams.get('utm_content') ?? null,
     utmTerm: searchParams.get('utm_term') ?? null,
     fullUrl: request.url,
+    fbclid: searchParams.get('fbclid') ?? null,
   }
 
   console.info('grupo redirect', trackingData)
+  await sendGrupoLeadEvent(request, trackingData)
 
   return NextResponse.redirect(WHATSAPP_GROUP_URL, { status: 302 })
 }
