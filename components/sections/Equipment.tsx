@@ -9,7 +9,7 @@ const cards = [
       </svg>
     ),
     title: 'Adaptações viáveis',
-    desc: 'Você aprende a adaptar cada etapa para o material que tem em mãos.',
+    desc: 'Você aprende a adaptar cada etapa para os materiais e recursos que possui no seu ateliê.',
   },
   {
     icon: (
@@ -18,7 +18,7 @@ const cards = [
       </svg>
     ),
     title: 'Soluções acessíveis',
-    desc: 'Ferramentas simples e disponíveis em qualquer papelaria ou loja de artesanato.',
+    desc: 'Grande parte das ferramentas e materiais utilizados podem ser encontrados em papelarias, lojas de artesanato e fornecedores nacionais.',
   },
   {
     icon: (
@@ -27,7 +27,7 @@ const cards = [
       </svg>
     ),
     title: 'Técnicas para o ateliê artesanal',
-    desc: 'Processo desenhado para quem trabalha em casa, com espaço limitado.',
+    desc: 'O processo foi desenvolvido para quem produz em casa, em pequenos espaços e dentro da rotina real do artesanal.',
   },
   {
     icon: (
@@ -36,7 +36,7 @@ const cards = [
       </svg>
     ),
     title: 'Foco em acabamento e estrutura',
-    desc: 'O que transforma uma peça comum em produto premium é o processo, não a máquina.',
+    desc: 'O que transforma uma peça comum em uma coleção com presença não é apenas a máquina. É a técnica, o acabamento e a maneira como cada peça é construída.',
   },
 ]
 
@@ -59,7 +59,7 @@ export default function Equipment() {
           <FadeIn>
             <div className="text-center mb-12">
               <h2 className="font-headline text-[clamp(1.5rem,2.8vw,2.5rem)] font-bold text-dark leading-[1.2] mb-0">
-                &ldquo;Mas preciso de ateliê profissional para fazer isso?&rdquo;
+                &ldquo;Mas preciso de um ateliê profissional para fazer isso?&rdquo;
               </h2>
             </div>
           </FadeIn>
@@ -82,8 +82,7 @@ export default function Equipment() {
 
           <FadeIn delay={130}>
             <p className="text-center text-dark/65 text-[16px] leading-relaxed mb-12 max-w-xl mx-auto">
-              Embora Leandro utilize equipamentos profissionais em seu ateliê,
-              o método do Laboratório foi pensado para a realidade da encadernação artesanal.
+              Embora Leandro utilize em seu ateliê ferramentas e estruturas desenvolvidas ao longo da sua trajetória na encadernação, o método do Laboratório foi pensado para a realidade da encadernação artesanal.
             </p>
           </FadeIn>
 
@@ -106,20 +105,21 @@ export default function Equipment() {
 
           {/* Quote de fechamento */}
           <FadeIn delay={450}>
-            <div className="text-center bg-dark rounded-2xl px-8 py-7 mb-10 shadow-[0_12px_40px_rgba(0,0,0,0.14)]">
-              <p className="text-cream/90 text-[17px] font-medium italic leading-relaxed">
-                &ldquo;O foco não é ter máquinas industriais.
+            <div className="text-center bg-dark rounded-2xl px-8 py-8 mb-10 shadow-[0_12px_40px_rgba(0,0,0,0.14)]">
+              <span className="block font-headline text-[64px] leading-none text-primary/20 mb-1 select-none">&ldquo;</span>
+              <p className="text-cream text-[17px] font-medium italic leading-relaxed mb-4">
+                O foco não é ter máquinas industriais.
                 <br />
-                É aprender a pensar e construir como uma encadernação profissional.&rdquo;
+                É se organizar para produzir, aprender a pensar, construir e apresentar suas peças como um ateliê artístico.
               </p>
-              <p className="text-cream/40 text-[12px] font-semibold tracking-wide uppercase mt-3">Leandro Mendes</p>
+              <p className="text-cream/50 text-[12px] font-semibold tracking-[0.15em] uppercase">— Leandro Mendes</p>
             </div>
           </FadeIn>
 
           <FadeIn delay={500}>
             <div className="flex flex-col items-center gap-2">
-              <CTAButton href="#">Quero participar do Laboratório</CTAButton>
-              <span className="text-muted text-xs tracking-wide">Mesmo sem ateliê profissional</span>
+              <CTAButton>✨ Quero participar do Laboratório</CTAButton>
+              <span className="text-muted text-xs tracking-wide">Mesmo sem um ateliê profissional</span>
             </div>
           </FadeIn>
 

@@ -12,14 +12,6 @@ const faqs = [
     q: 'Preciso ter ateliê ou ferramentas profissionais?',
     a: 'Não. O método foi pensado pro ateliê artesanal, com material acessível.',
   },
-  {
-    q: 'A aula é paga?',
-    a: 'Não. A aula de abertura em 05/06 é gratuita. O Grupo VIP garante seu aviso prioritário.',
-  },
-  {
-    q: 'O que acontece depois do Grupo VIP?',
-    a: 'Você recebe conteúdos preparatórios e o link da aula ao vivo no dia 05/06. Sem compromisso de compra.',
-  },
 ]
 
 export default function FAQ() {

@@ -1,42 +1,21 @@
 import FadeIn from '@/components/FadeIn'
-import CTAButton from '@/components/CTAButton'
 
-const items = [
+const materials = [
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-    title: 'Execução mais rápida',
-    desc: 'Com os gabaritos prontos, você elimina o tempo de cálculo e vai direto para a construção.',
+    title: 'Display para Fichas Técnicas + Arquivos da Coleção',
+    desc: 'Você receberá um display exclusivo acompanhado de fichas técnicas desenvolvidas por Leandro Mendes. Um novo jeito de organizar conhecimento, registrar processos e manter informações importantes sempre à mão no ateliê.',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    title: 'Precisão garantida',
-    desc: 'Medidas exatas para que o acabamento final saia perfeito em todas as peças.',
+    title: 'Gabarito para Estrutura Interna da Pasta Premium',
+    desc: 'Um apoio pensado para trazer mais precisão e agilidade durante a construção da pasta da coleção. Porque quando organizamos melhor o processo, também ganhamos tempo para crescer em outras áreas importantes do ateliê.',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
-    ),
-    title: 'Repetibilidade',
-    desc: 'Reproduza qualquer peça do kit com o mesmo resultado, toda vez.',
+    title: 'Gabarito para Envelope com Papel de Carta',
+    desc: 'Uma das peças mais encantadoras da coleção. O envelope com papel de carta ajuda a criar conexão, presença e experiência dentro do artesanal. E agora você terá uma estrutura pronta para construir essa peça com mais facilidade e consistência.',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-      </svg>
-    ),
-    title: 'Padronização do acabamento',
-    desc: 'Garante consistência quando você começa a produzir em maior quantidade.',
+    title: 'Gabarito para Embalagem do Marcador de Página',
+    desc: 'Os detalhes também contam histórias. Esse gabarito foi pensado para desenvolver embalagens delicadas e bem construídas, reforçando o cuidado e a identidade da coleção.',
   },
 ]
 
@@ -54,42 +33,69 @@ export default function Bonus() {
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-12">
 
         {/* Header */}
-        <div className="max-w-2xl mx-auto text-center mb-14">
+        <div className="max-w-2xl mx-auto text-center mb-10">
           <FadeIn delay={80}>
-            <h2 className="font-headline text-[clamp(1.5rem,2.8vw,2.5rem)] font-bold text-dark leading-[1.2] mb-4">
-              Além das aulas, você recebe os{' '}
-              <em className="text-primary not-italic">gabaritos técnicos</em>{' '}
-              utilizados no processo.
+            <h2 className="font-headline text-[clamp(1.5rem,2.8vw,2.5rem)] font-bold text-dark leading-[1.2] mb-5">
+              Além das aulas, todas as inscritas recebem{' '}
+              <em className="text-primary not-italic">materiais físicos</em>{' '}
+              desenvolvidos especialmente para o Laboratório ✨
             </h2>
           </FadeIn>
           <FadeIn delay={140}>
-            <p className="text-dark/60 text-[16px] leading-relaxed">
-              Moldes e estruturas utilizados na construção de cada produto do kit.
+            <p className="text-dark/65 text-[16px] leading-relaxed mb-4">
+              Mais do que bônus, esses materiais foram pensados para facilitar processos, organizar o aprendizado e elevar o nível da sua produção desde o início.
             </p>
+          </FadeIn>
+          <FadeIn delay={180}>
+            <div className="inline-block bg-white border border-primary/20 rounded-xl px-6 py-4 shadow-card">
+              <p className="text-dark/60 text-[15px] leading-relaxed italic mb-1">E sinceramente?</p>
+              <p className="text-dark/80 text-[15px] leading-relaxed font-medium">
+                O valor dos materiais enviados já representa uma parte muito importante da experiência do Laboratório.
+              </p>
+            </div>
           </FadeIn>
         </div>
 
-        {/* Cards em grade 2×2 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12">
-          {items.map((item, i) => (
-            <FadeIn key={item.title} delay={200 + i * 70}>
-              <div className="flex gap-4 bg-white border border-dark/8 rounded-2xl px-6 py-6 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover hover:border-primary/20 transition-all duration-300 h-full">
-                <span className="flex-shrink-0 mt-0.5 p-2 bg-primary/10 border border-primary/20 rounded-lg text-primary h-fit">
-                  {item.icon}
-                </span>
-                <div>
-                  <p className="font-headline text-[16px] text-dark mb-1.5 leading-snug">{item.title}</p>
-                  <p className="text-dark/55 text-[13px] leading-relaxed">{item.desc}</p>
+        {/* Material cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto mb-14">
+          {materials.map((item, i) => (
+            <FadeIn key={item.title} delay={220 + i * 80}>
+              <div className="relative flex flex-col bg-white border border-dark/8 rounded-2xl px-6 py-6 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover hover:border-primary/25 transition-all duration-300 h-full">
+                <div className="absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-gradient-to-b from-primary to-primary/20" />
+                <div className="flex items-start gap-3 mb-3 pl-1">
+                  <span className="text-primary text-[14px] font-bold mt-0.5 shrink-0">✦</span>
+                  <p className="font-headline text-[15px] text-dark leading-snug">{item.title}</p>
                 </div>
+                <p className="text-dark/60 text-[13px] leading-relaxed pl-1">{item.desc}</p>
               </div>
             </FadeIn>
           ))}
         </div>
 
-        <FadeIn delay={480}>
-          <div className="flex flex-col items-center gap-2">
-            <CTAButton href="#">Quero receber os gabaritos</CTAButton>
-            <span className="text-muted text-xs tracking-wide">Bônus exclusivo do Laboratório</span>
+        {/* Closing */}
+        <FadeIn delay={520}>
+          <div className="max-w-xl mx-auto text-center mb-10">
+            <h3 className="font-headline text-[clamp(1.3rem,2.5vw,1.9rem)] font-bold text-dark mb-4">
+              Muito mais do que presentes.
+            </h3>
+            <p className="text-dark/65 text-[16px] leading-relaxed mb-3">
+              Esses materiais foram criados para apoiar o seu crescimento técnico, artístico e organizacional dentro da encadernação artesanal.
+            </p>
+            <p className="text-dark/65 text-[16px] leading-relaxed">
+              São ferramentas pensadas para acompanhar o seu novo momento como artesã papeleira.
+            </p>
+          </div>
+        </FadeIn>
+
+        {/* Inclusion note */}
+        <FadeIn delay={580}>
+          <div className="flex flex-col items-center gap-1.5">
+            <div className="bg-dark rounded-xl px-7 py-4 text-center shadow-dark-card">
+              <p className="text-cream text-[14px] font-semibold">
+                ✨ Todos os materiais físicos estão inclusos para as inscritas no Laboratório
+              </p>
+            </div>
+            <p className="text-muted text-[12px] tracking-wide">(frete por conta da aluna)</p>
           </div>
         </FadeIn>
 

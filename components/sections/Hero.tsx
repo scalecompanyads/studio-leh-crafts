@@ -4,23 +4,20 @@ import CTAButton from '@/components/CTAButton'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[560px] flex items-end md:items-center overflow-hidden bg-[#DFCDAD] pt-[300px] pb-16 md:py-24">
-      {/* Background image — sem overlay de gradiente */}
-      <Image
-        src="/desktop-bg.jpg"
-        alt=""
-        fill
-        priority
-        className="object-cover object-center hidden md:block"
-        sizes="100vw"
+    <section className="relative min-h-[560px] md:min-h-[min(100vh,820px)] flex items-end md:items-center overflow-hidden bg-[#E0CEAE] pt-[300px] pb-16 md:py-24">
+      {/* Desktop: CSS background = arquivo em /public servido byte-a-byte, zero Next/Image */}
+      <div
+        className="absolute inset-0 z-0 hidden md:block bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/desktop-bg2%20copiar2.jpg')" }}
+        role="presentation"
+        aria-hidden
       />
-      <Image
-        src="/mobile-bg.jpg"
-        alt=""
-        fill
-        priority
-        className="object-contain object-top block md:hidden"
-        sizes="100vw"
+      {/* Mobile: arquivo estático em /public, sem Next/Image */}
+      <div
+        className="absolute inset-0 z-0 block md:hidden bg-contain bg-top bg-no-repeat"
+        style={{ backgroundImage: "url('/mobile-new.jpg')" }}
+        role="presentation"
+        aria-hidden
       />
 
       {/* Content */}
@@ -39,27 +36,35 @@ export default function Hero() {
 
           <FadeIn delay={200}>
             <h1
-              className="font-headline text-[clamp(1.79rem,3.57vw,2.89rem)] font-bold leading-[1.1] text-primary mb-5 mt-[80px] md:mt-0"
+              className="font-headline text-[clamp(1.625rem,3.25vw,2.63rem)] md:text-[clamp(1.25rem,2.5vw,2.02rem)] font-bold leading-[1.1] text-primary mb-3 -mt-[50px] md:mt-0"
             >
-              Aprenda a montar um kit completo de papelaria artesanal premium começando do zero,
-              sem material caro e sem ateliê.
+              Aprenda a construir uma coleção encantadora de papelaria artesanal a partir de três pilares:
             </h1>
-          </FadeIn>
-
-          <FadeIn delay={300}>
-            <p className="text-black/80 text-[17px] leading-relaxed mb-9 max-w-sm mx-auto md:mx-0">
-              O Laboratório Sewn Boards ensina a técnica que transforma encadernação artesanal em produto premium — para quem quer começar do zero já com padrão profissional, ou para quem vende há anos e ainda cobra menos do que deveria.
+            <p className="font-headline text-[clamp(1.25rem,2.5vw,1.75rem)] font-semibold text-primary/80 italic mb-5">
+              crescimento técnico, artístico e cultural.
             </p>
           </FadeIn>
 
-          <FadeIn delay={380}>
+          <FadeIn delay={300}>
+            <p className="text-black/80 text-[17px] leading-relaxed mb-4 max-w-sm mx-auto md:mx-0">
+              Desenvolva peças com mais presença, acabamento e identidade enquanto aprende a produzir um kit completo de papelaria premium utilizando a técnica Sewn Boards Binding.
+            </p>
+            <p className="text-black/65 text-[15px] leading-relaxed mb-7 max-w-sm mx-auto md:mx-0">
+              Uma formação pensada tanto para quem deseja começar com estrutura, quanto para artesãs que já produzem, mas sentem que seus produtos ainda não expressam todo o valor do seu trabalho.
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={360}>
+            <p className="text-[14px] text-primary font-medium mb-5 mx-auto md:mx-0 max-w-sm text-center md:text-left">
+              ✨ Coleção exclusiva + fichas técnicas + gabaritos de apoio
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={420}>
             <div className="flex flex-col items-center md:items-start gap-3">
-              <CTAButton href="#" size="lg">
-                Entrar no Grupo VIP da Aula de Abertura
+              <CTAButton size="lg">
+                Entrar no Grupo VIP
               </CTAButton>
-              <p className="text-black/55 text-[13px]">
-                Acesso gratuito · Aula ao vivo em 05/06
-              </p>
             </div>
           </FadeIn>
 

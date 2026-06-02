@@ -36,10 +36,13 @@ export default function About() {
           {/* Conteúdo */}
           <div>
             <FadeIn delay={120}>
-              <h2 className="font-headline text-[clamp(1.7rem,3vw,2.6rem)] font-bold text-white leading-[1.2] mb-7">
+              <h2 className="font-headline text-[clamp(1.7rem,3vw,2.6rem)] font-bold text-white leading-[1.2] mb-3">
                 Conheça{' '}
                 <em className="text-cream/85 not-italic">Leandro Mendes.</em>
               </h2>
+              <p className="text-cream/55 text-sm md:text-base tracking-wide uppercase mb-7">
+                Idealizador do Laboratório de Encadernção - Fundador do StudioLehCrafts
+              </p>
             </FadeIn>
 
             <FadeIn delay={180}>
@@ -85,7 +88,7 @@ export default function About() {
 
             <FadeIn delay={380}>
               <div className="flex flex-col items-start gap-2">
-                <CTAButton href="#" variant="primary">Quero aprender com Leandro</CTAButton>
+                <CTAButton variant="primary">Quero aprender com Leandro</CTAButton>
                 <span className="text-cream/40 text-xs tracking-wide">Aula de abertura em 05/06</span>
               </div>
             </FadeIn>

@@ -32,11 +32,11 @@ export default function CTAFinal() {
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-12">
 
         <FadeIn delay={80}>
-          <h2 className="font-headline text-[clamp(2rem,5vw,3.75rem)] font-bold text-white leading-[1.1] max-w-3xl mx-auto mb-6">
-            Existe uma diferença entre produzir peças artesanais…
+          <h2 className="font-headline text-[clamp(2rem,5vw,3.75rem)] font-bold text-white leading-[1.15] max-w-3xl mx-auto mb-6">
+            O Laboratório nasce no momento em que a artesã deixa de apenas produzir
             <br />
-            e criar produtos que as pessoas{' '}
-            <em className="text-cream/90 not-italic">desejam guardar.</em>
+            e começa a construir um trabalho{' '}
+            <em className="text-cream/90 not-italic">com identidade.</em>
           </h2>
         </FadeIn>
 
@@ -48,7 +48,7 @@ export default function CTAFinal() {
         </FadeIn>
 
         <FadeIn delay={240}>
-          <CTAButton href="#" variant="dark" size="lg" className="mx-auto">
+          <CTAButton variant="dark" size="lg" className="mx-auto">
             Entrar no Grupo VIP
           </CTAButton>
         </FadeIn>

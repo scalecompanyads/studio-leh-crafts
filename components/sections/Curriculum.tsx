@@ -3,11 +3,11 @@ import FadeIn from '@/components/FadeIn'
 import CTAButton from '@/components/CTAButton'
 
 const kitItems = [
-  { num: '01', title: 'Caderno artesanal premium' },
-  { num: '02', title: 'Pasta de documentos coordenada' },
+  { num: '01', title: 'Caderno artesanal utilizando a técnica Sewn Boards Binding' },
+  { num: '02', title: 'Pasta premium para documentos' },
   { num: '03', title: 'Envelope com papel de carta' },
-  { num: '04', title: 'Marca-página' },
-  { num: '05', title: 'Card da coleção' },
+  { num: '04', title: 'Marcador de páginas' },
+  { num: '05', title: 'Card conceitual contando a história da coleção' },
 ]
 
 export default function Curriculum() {
@@ -33,8 +33,8 @@ export default function Curriculum() {
           <FadeIn delay={60} className="order-first md:order-last">
             <div className="relative rounded-2xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.14)]">
               <Image
-                src="/curriculum-kit.jpg"
-                alt="Caderno artesanal premium feito com a técnica Sewn Boards"
+                src="/carousel-4.png"
+                alt="Coleção Bloom Lines — cadernos, marca-página, card e envelope artesanal"
                 width={600}
                 height={750}
                 className="w-full h-auto object-cover"
@@ -54,14 +54,16 @@ export default function Curriculum() {
               <h2 className="font-headline text-[clamp(1.6rem,3vw,2.75rem)] font-bold text-dark leading-[1.2] mb-5">
                 Desenvolva uma{' '}
                 <em className="text-primary not-italic">coleção completa</em>{' '}
-                de encadernação premium.
+                de encadernação autoral.
               </h2>
             </FadeIn>
 
             <FadeIn delay={140}>
+              <p className="text-dark/70 text-[16px] leading-relaxed mb-3">
+                Durante o Laboratório da Encadernação, Leandro Mendes e seu time conduzem passo a passo a construção de uma coleção coordenada de papelaria artesanal.
+              </p>
               <p className="text-dark/65 text-[16px] leading-relaxed mb-9">
-                Durante o Laboratório Sewn Boards, Leandro Mendes ensina passo a passo
-                a construção de um kit coordenado de papelaria artesanal de alto padrão.
+                Cada peça foi pensada para conversar entre si, criando uma experiência visual coesa, elegante e cheia de identidade.
               </p>
             </FadeIn>
 
@@ -83,13 +85,18 @@ export default function Curriculum() {
             </FadeIn>
 
             <FadeIn delay={300}>
-              <p className="text-primary/90 font-medium text-[16px] leading-relaxed mb-8 border-t border-primary/15 pt-6">
-                Tudo para criar uma linha visual coesa, sofisticada e com valor percebido elevado.
-              </p>
+              <div className="border-t border-primary/15 pt-6 mb-8">
+                <p className="text-dark/75 text-[16px] leading-relaxed mb-2">
+                  Mais do que aprender peças isoladas, você desenvolverá um conjunto construído com intenção, acabamento e presença.
+                </p>
+                <p className="text-primary font-medium text-[16px] leading-relaxed">
+                  Uma coleção pensada para transmitir valor desde o primeiro contato.
+                </p>
+              </div>
             </FadeIn>
 
             <FadeIn delay={360}>
-              <CTAButton href="#">Quero criar minha coleção</CTAButton>
+              <CTAButton>✨ Quero criar minha coleção</CTAButton>
             </FadeIn>
           </div>
 
