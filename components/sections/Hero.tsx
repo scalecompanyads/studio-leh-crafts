@@ -36,7 +36,7 @@ export default function Hero() {
 
           <FadeIn delay={200}>
             <h1
-              className="font-headline text-[clamp(1.625rem,3.25vw,2.63rem)] md:text-[clamp(1.25rem,2.5vw,2.02rem)] font-bold leading-[1.1] text-primary mb-3 -mt-[50px] md:mt-0"
+              className="font-headline text-[clamp(1.625rem,3.25vw,2.63rem)] md:text-[clamp(1.25rem,2.5vw,2.02rem)] font-bold leading-[1.1] text-primary mb-3"
             >
               Aprenda a construir uma coleção encantadora de papelaria artesanal a partir de três pilares:
             </h1>
