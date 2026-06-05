@@ -30,7 +30,7 @@ export default function Hero() {
               alt="Studio Leh Crafts"
               width={140}
               height={52}
-              className="mb-7 rounded-xl mx-auto md:mx-0"
+              className="mb-[20px] rounded-xl mx-auto md:mx-0"
             />
           </FadeIn>
 
