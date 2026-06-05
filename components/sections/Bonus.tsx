@@ -93,19 +93,14 @@ export default function Bonus() {
                 { src: '/gabarito/Baixa-28.jpg', alt: 'Gabarito de Marcador' },
                 { src: '/gabarito/Baixa-29.jpg', alt: 'Coleção Completa' },
               ].map((img, i) => (
-                <div key={i} className="flex flex-col gap-2">
-                  <div className="group relative aspect-[3/4] rounded-xl overflow-hidden shadow-card border border-dark/15 bg-white">
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 50vw, 20vw"
-                    />
-                  </div>
-                  <p className="text-[12px] font-bold text-dark/95 text-center leading-tight">
-                    {img.alt}
-                  </p>
+                <div key={i} className="group relative aspect-[3/4] rounded-xl overflow-hidden shadow-card border border-dark/15 bg-white">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 50vw, 20vw"
+                  />
                 </div>
               ))}
             </div>
