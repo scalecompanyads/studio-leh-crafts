@@ -25,8 +25,8 @@ export default function Home() {
       <Transformation />
       <Bonus />
       <ForWhom />
-      <FAQ />
       <CTAFinal />
+      <FAQ />
       <Footer />
     </main>
   )
