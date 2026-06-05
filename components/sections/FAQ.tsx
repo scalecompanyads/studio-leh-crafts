@@ -62,7 +62,7 @@ export default function FAQ() {
                     open === i ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <p className="px-6 pb-5 pt-0 text-[15px] text-muted leading-relaxed border-t border-muted/15">
+                  <p className="px-6 pb-5 pt-0 text-[15px] text-dark/95 font-medium leading-relaxed border-t border-muted/15">
                     {faq.a}
                   </p>
                 </div>

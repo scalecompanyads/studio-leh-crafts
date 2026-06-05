@@ -46,24 +46,24 @@ export default function Hero() {
           </FadeIn>
 
           <FadeIn delay={300}>
-            <p className="text-black/80 text-[17px] leading-relaxed mb-4 max-w-sm mx-auto md:mx-0">
+            <p className="text-black text-[17px] font-medium leading-relaxed mb-4 max-w-sm mx-auto md:mx-0">
               Desenvolva peças com mais presença, acabamento e identidade enquanto aprende a produzir um kit completo de papelaria premium utilizando a técnica Sewn Boards Binding.
             </p>
-            <p className="text-black/65 text-[15px] leading-relaxed mb-7 max-w-sm mx-auto md:mx-0">
+            <p className="text-black/85 text-[15px] leading-relaxed mb-7 max-w-sm mx-auto md:mx-0">
               Uma formação pensada tanto para quem deseja começar com estrutura, quanto para artesãs que já produzem, mas sentem que seus produtos ainda não expressam todo o valor do seu trabalho.
             </p>
           </FadeIn>
 
           <FadeIn delay={360}>
-            <p className="text-[14px] text-primary font-medium mb-5 mx-auto md:mx-0 max-w-sm text-center md:text-left">
+            <p className="text-[14px] text-primary font-semibold mb-5 mx-auto md:mx-0 max-w-sm text-center md:text-left">
               ✨ Coleção exclusiva + fichas técnicas + gabaritos de apoio
             </p>
           </FadeIn>
 
           <FadeIn delay={420}>
-            <div className="flex flex-col items-center md:items-start gap-3">
+            <div className="flex flex-col items-center md:items-start gap-1">
               <CTAButton size="lg">
-                Entrar no Grupo VIP
+                Comprar Agora
               </CTAButton>
             </div>
           </FadeIn>
@@ -72,15 +72,15 @@ export default function Hero() {
             <div className="flex justify-center md:justify-start gap-6 mt-10 pt-8 border-t border-dark/10">
               <div className="text-center md:text-left">
                 <p className="font-headline text-[18px] font-bold text-primary leading-tight">Brasil</p>
-                <p className="text-dark/55 text-[12px] mt-0.5 leading-tight">Alunas em todo o país</p>
+                <p className="text-dark/85 text-[12px] mt-0.5 leading-tight">Alunas em todo o país</p>
               </div>
               <div className="text-center md:text-left">
                 <p className="font-headline text-[18px] font-bold text-primary leading-tight">Zero</p>
-                <p className="text-dark/55 text-[12px] mt-0.5 leading-tight">Equipamento industrial necessário</p>
+                <p className="text-dark/85 text-[12px] mt-0.5 leading-tight">Equipamento industrial necessário</p>
               </div>
               <div className="text-center md:text-left">
                 <p className="font-headline text-[18px] font-bold text-primary leading-tight">1 Técnica</p>
-                <p className="text-dark/55 text-[12px] mt-0.5 leading-tight">Que muda tudo</p>
+                <p className="text-dark/85 text-[12px] mt-0.5 leading-tight">Que muda tudo</p>
               </div>
             </div>
           </FadeIn>

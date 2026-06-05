@@ -18,7 +18,7 @@ export default function About() {
               <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_24px_56px_rgba(0,0,0,0.5),0_0_0_1px_rgba(196,107,75,0.15)]">
                 <Image
                   src="/leh.jpg"
-                  alt="Leandro Mendes Macedo — Studio Leh Crafts"
+                  alt="Leandro Mendes Macedo • Studio Leh Crafts"
                   fill
                   className="object-cover hover:scale-[1.03] transition-transform duration-700"
                   sizes="(max-width: 768px) 300px, 40vw"
@@ -38,15 +38,15 @@ export default function About() {
             <FadeIn delay={120}>
               <h2 className="font-headline text-[clamp(1.7rem,3vw,2.6rem)] font-bold text-white leading-[1.2] mb-3">
                 Conheça{' '}
-                <em className="text-cream/85 not-italic">Leandro Mendes.</em>
+                <em className="text-cream/95 not-italic">Leandro Mendes.</em>
               </h2>
-              <p className="text-cream/55 text-sm md:text-base tracking-wide uppercase mb-7">
-                Idealizador do Laboratório de Encadernção - Fundador do StudioLehCrafts
+              <p className="text-cream/85 text-sm md:text-base font-semibold tracking-wide uppercase mb-7">
+                Idealizador do Laboratório de Encadernação - Fundador do StudioLehCrafts
               </p>
             </FadeIn>
 
             <FadeIn delay={180}>
-              <p className="text-cream/75 text-[16px] leading-[1.8] mb-5">
+              <p className="text-cream/90 text-[16px] leading-[1.8] mb-5">
                 Leandro Mendes Macedo é artesão, professor e fundador do Studio Leh Crafts.
                 Sua trajetória foi construída dentro da prática da encadernação, atuando
                 em oficinas de pequeno e médio porte, onde desenvolveu experiência em
@@ -55,7 +55,7 @@ export default function About() {
             </FadeIn>
 
             <FadeIn delay={230}>
-              <p className="text-cream/75 text-[16px] leading-[1.8] mb-5">
+              <p className="text-cream/90 text-[16px] leading-[1.8] mb-5">
                 Com o passar dos anos, levou esse conhecimento para o universo da encadernação
                 artesanal, aprofundando-se nas necessidades reais de artesãos e papeleiras que
                 desejam transformar seus ateliês em negócios estruturados e valorizados.
@@ -63,7 +63,7 @@ export default function About() {
             </FadeIn>
 
             <FadeIn delay={280}>
-              <p className="text-cream/75 text-[16px] leading-[1.8] mb-8">
+              <p className="text-cream/90 text-[16px] leading-[1.8] mb-8">
                 Hoje, Leandro une técnica, prática e posicionamento profissional para ajudar
                 artesãs a criarem papelarias que encantam e desenvolverem produtos com mais
                 valor dentro da economia criativa.
@@ -79,17 +79,16 @@ export default function About() {
                   { valor: 'Premium', label: 'do zero ao avançado' },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center">
-                    <p className="font-headline text-[17px] font-semibold text-cream/95 leading-tight">{stat.valor}</p>
-                    <p className="text-cream/45 text-[12px] mt-0.5 leading-tight">{stat.label}</p>
+                    <p className="font-headline text-[17px] font-semibold text-cream leading-tight">{stat.valor}</p>
+                    <p className="text-cream/75 text-[12px] font-medium mt-0.5 leading-tight">{stat.label}</p>
                   </div>
                 ))}
               </div>
             </FadeIn>
 
             <FadeIn delay={380}>
-              <div className="flex flex-col items-start gap-2">
-                <CTAButton variant="primary">Quero aprender com Leandro</CTAButton>
-                <span className="text-cream/40 text-xs tracking-wide">Aula de abertura em 05/06</span>
+              <div className="flex flex-col items-start gap-1.5">
+                <CTAButton variant="primary">Comprar Agora</CTAButton>
               </div>
             </FadeIn>
           </div>

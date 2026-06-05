@@ -245,13 +245,13 @@ export default function Mechanism() {
             </h2>
           </FadeIn>
           <FadeIn delay={140}>
-            <p className="text-cream/80 text-[17px] leading-relaxed mb-1">
+            <p className="text-cream text-[17px] font-medium leading-relaxed mb-1">
               O Laboratório da Encadernação foi construído a partir de três pilares:
             </p>
-            <p className="text-primary text-[17px] font-semibold italic leading-relaxed mb-6">
+            <p className="text-primary text-[17px] font-bold italic leading-relaxed mb-6">
               crescimento técnico, artístico e cultural.
             </p>
-            <p className="text-cream/70 text-[16px] leading-relaxed">
+            <p className="text-cream/90 text-[16px] leading-relaxed">
               E para guiar essa jornada, reunimos três professores com diferentes especialidades dentro do universo da encadernação e da criação.
             </p>
           </FadeIn>
@@ -295,7 +295,7 @@ export default function Mechanism() {
                   <div className="absolute top-4 right-4 w-6 h-6 border-t-[1.5px] border-r-[1.5px] border-dark/30" />
 
                   {/* Volume */}
-                  <p className="relative z-10 font-mono text-[10px] tracking-[0.28em] text-dark/50 mb-5">
+                  <p className="relative z-10 font-mono text-[10px] tracking-[0.28em] text-dark/55 mb-5">
                     vol. {['I', 'II', 'III'][i]}
                   </p>
 
@@ -315,7 +315,7 @@ export default function Mechanism() {
                   <div className="relative z-10 w-full h-px bg-dark/20 mb-4" />
 
                   {/* Description */}
-                  <p className="relative z-10 text-dark/80 text-[13px] leading-relaxed flex-1">
+                  <p className="relative z-10 text-dark text-[13px] font-medium leading-relaxed flex-1">
                     {prof.description}
                   </p>
 
@@ -323,7 +323,7 @@ export default function Mechanism() {
                   <div className="absolute z-10 left-0 right-0 bottom-[3.75rem] h-px bg-dark/15" />
 
                   {/* Footer */}
-                  <p className="relative z-10 text-dark/60 text-[12px] italic mt-5 leading-snug">
+                  <p className="relative z-10 text-dark/85 text-[12px] font-medium italic mt-5 leading-snug">
                     {prof.footer}
                   </p>
 
@@ -336,7 +336,7 @@ export default function Mechanism() {
         {/* Closing */}
         <FadeIn delay={200}>
           <div className="max-w-2xl mx-auto text-center border-t border-white/12 pt-12">
-            <p className="text-cream/75 text-[16px] leading-relaxed mb-5">
+            <p className="text-cream text-[16px] font-medium leading-relaxed mb-5">
               O Laboratório nasce justamente desse encontro:
             </p>
             <div className="inline-flex flex-col gap-1 text-left mb-6">
@@ -351,7 +351,7 @@ export default function Mechanism() {
                 </p>
               ))}
             </div>
-            <p className="text-cream/65 text-[15px] leading-relaxed italic">
+            <p className="text-cream/90 text-[15px] leading-relaxed italic">
               Mais do que aprender encadernação, você desenvolverá uma nova forma de enxergar o próprio trabalho artesanal.
             </p>
           </div>

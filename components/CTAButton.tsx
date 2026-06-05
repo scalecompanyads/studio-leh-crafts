@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { GRUPO_VIP_URL } from '@/lib/constants'
+import { PRECO_SECTION_URL } from '@/lib/constants'
 
 interface CTAButtonProps {
   href?: string
@@ -10,7 +10,7 @@ interface CTAButtonProps {
 }
 
 export default function CTAButton({
-  href = GRUPO_VIP_URL,
+  href = PRECO_SECTION_URL,
   children,
   variant = 'primary',
   size = 'md',

@@ -18,7 +18,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Laboratório Sewn Boards — Studio Leh Crafts',
+  title: 'Laboratório Sewn Boards • Studio Leh Crafts',
   description:
     'Aprenda a criar um kit completo de papelaria premium com a técnica Sewn Boards Binding. Studio Leh Crafts com Leandro Mendes.',
 }

@@ -54,7 +54,7 @@ export default function Transformation() {
               {before.map((item) => (
                 <li
                   key={item}
-                  className="flex items-center gap-3 h-8 text-[13px] text-dark/70 leading-none"
+                  className="flex items-center gap-3 h-8 text-[13px] text-dark font-medium leading-none"
                 >
                   <span className="flex-shrink-0 text-[#c07060] font-bold text-[12px]">✕</span>
                   <span>{item}</span>
@@ -77,7 +77,7 @@ export default function Transformation() {
               {after.map((item) => (
                 <li
                   key={item}
-                  className="flex items-center gap-3 h-8 text-[13px] text-dark/70 leading-none"
+                  className="flex items-center gap-3 h-8 text-[13px] text-dark font-semibold leading-none"
                 >
                   <span className="flex-shrink-0 text-accent font-bold text-[12px]">✓</span>
                   <span>{item}</span>
@@ -90,19 +90,18 @@ export default function Transformation() {
         {/* Closing text */}
         <FadeIn delay={220}>
           <div className="max-w-xl mx-auto text-center mt-12 mb-10">
-            <p className="text-cream/75 text-[16px] leading-relaxed mb-3">
+            <p className="text-cream text-[16px] font-medium leading-relaxed mb-3">
               Existe uma diferença enorme entre produzir peças artesanais e desenvolver coleções que carregam identidade.
             </p>
-            <p className="text-primary font-semibold text-[16px] leading-relaxed">
+            <p className="text-primary font-bold text-[16px] leading-relaxed">
               O Laboratório nasce justamente para construir essa diferença.
             </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={300}>
-          <div className="flex flex-col items-center gap-2">
-            <CTAButton variant="primary">✨ Quero fazer parte do Laboratório</CTAButton>
-            <span className="text-cream/40 text-xs tracking-wide">Garanta sua vaga no Grupo VIP</span>
+          <div className="flex flex-col items-center gap-1.5">
+            <CTAButton variant="primary">✨ Comprar Agora</CTAButton>
           </div>
         </FadeIn>
 

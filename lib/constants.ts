@@ -1,1 +1,2 @@
-export const GRUPO_VIP_URL = 'https://studio-leh-crafts.vercel.app/grupo'
+export const CHECKOUT_URL = 'https://chk.eduzz.com/D0R8NJ469Y'
+export const PRECO_SECTION_URL = '#preco'

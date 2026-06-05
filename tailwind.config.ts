@@ -11,10 +11,10 @@ const config: Config = {
       colors: {
         primary: '#c46b4b',
         'primary-dark': '#a45236',
-        dark: '#3d5628',
-        'dark-deep': '#2a3d1f',
-        muted: '#92776f',
-        accent: '#6c7a3a',
+        dark: '#1e2d14',
+        'dark-deep': '#111b0b',
+        muted: '#5e4841',
+        accent: '#515e29',
         cream: '#f7ece2',
       },
       fontFamily: {

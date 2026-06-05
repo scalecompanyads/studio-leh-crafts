@@ -34,7 +34,7 @@ export default function Curriculum() {
             <div className="relative rounded-2xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.14)]">
               <Image
                 src="/carousel-4.png"
-                alt="Coleção Bloom Lines — cadernos, marca-página, card e envelope artesanal"
+                alt="Coleção Bloom Lines • cadernos, marca-página, card e envelope artesanal"
                 width={600}
                 height={750}
                 className="w-full h-auto object-cover"
@@ -59,10 +59,10 @@ export default function Curriculum() {
             </FadeIn>
 
             <FadeIn delay={140}>
-              <p className="text-dark/70 text-[16px] leading-relaxed mb-3">
+              <p className="text-dark/95 text-[16px] font-medium leading-relaxed mb-3">
                 Durante o Laboratório da Encadernação, Leandro Mendes e seu time conduzem passo a passo a construção de uma coleção coordenada de papelaria artesanal.
               </p>
-              <p className="text-dark/65 text-[16px] leading-relaxed mb-9">
+              <p className="text-dark/90 text-[16px] leading-relaxed mb-9">
                 Cada peça foi pensada para conversar entre si, criando uma experiência visual coesa, elegante e cheia de identidade.
               </p>
             </FadeIn>
@@ -73,12 +73,12 @@ export default function Curriculum() {
                 {kitItems.map((item) => (
                   <div
                     key={item.num}
-                    className="group flex items-center gap-4 bg-white border-l-[3px] border-primary rounded-r-xl px-5 py-3.5 shadow-card hover:translate-x-1 hover:shadow-[0_8px_28px_rgba(0,0,0,0.09)] transition-all duration-300"
+                    className="group flex items-center gap-4 bg-white border-l-[3px] border-primary border-t border-r border-b border-dark/10 rounded-r-xl px-5 py-3.5 shadow-card hover:translate-x-1 hover:shadow-[0_8px_28px_rgba(0,0,0,0.09)] transition-all duration-300"
                   >
                     <span className="flex-shrink-0 text-[11px] font-bold tracking-widest text-primary/70 font-sans w-6">
                       {item.num}
                     </span>
-                    <span className="font-headline text-[17px] text-dark/90">{item.title}</span>
+                    <span className="font-headline text-[17px] text-dark font-semibold">{item.title}</span>
                   </div>
                 ))}
               </div>
@@ -86,17 +86,17 @@ export default function Curriculum() {
 
             <FadeIn delay={300}>
               <div className="border-t border-primary/15 pt-6 mb-8">
-                <p className="text-dark/75 text-[16px] leading-relaxed mb-2">
+                <p className="text-dark/95 text-[16px] leading-relaxed mb-2">
                   Mais do que aprender peças isoladas, você desenvolverá um conjunto construído com intenção, acabamento e presença.
                 </p>
-                <p className="text-primary font-medium text-[16px] leading-relaxed">
+                <p className="text-primary font-bold text-[16px] leading-relaxed">
                   Uma coleção pensada para transmitir valor desde o primeiro contato.
                 </p>
               </div>
             </FadeIn>
 
             <FadeIn delay={360}>
-              <CTAButton>✨ Quero criar minha coleção</CTAButton>
+              <CTAButton>✨ Comprar Agora</CTAButton>
             </FadeIn>
           </div>
 

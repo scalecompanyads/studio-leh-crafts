@@ -81,7 +81,7 @@ export default function Equipment() {
           </FadeIn>
 
           <FadeIn delay={130}>
-            <p className="text-center text-dark/65 text-[16px] leading-relaxed mb-12 max-w-xl mx-auto">
+            <p className="text-center text-dark/95 text-[16px] font-medium leading-relaxed mb-12 max-w-xl mx-auto">
               Embora Leandro utilize em seu ateliê ferramentas e estruturas desenvolvidas ao longo da sua trajetória na encadernação, o método do Laboratório foi pensado para a realidade da encadernação artesanal.
             </p>
           </FadeIn>
@@ -90,13 +90,13 @@ export default function Equipment() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-12">
             {cards.map((card, i) => (
               <FadeIn key={card.title} delay={180 + i * 70}>
-                <div className="flex gap-4 bg-white border border-dark/8 rounded-xl px-5 py-5 text-left shadow-card hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-card-hover transition-all duration-300 h-full">
+                <div className="flex gap-4 bg-white border border-dark/15 rounded-xl px-5 py-5 text-left shadow-card hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-card-hover transition-all duration-300 h-full">
                   <span className="flex-shrink-0 mt-0.5 p-2 bg-accent/10 border border-accent/20 rounded-lg text-accent h-fit">
                     {card.icon}
                   </span>
                   <div>
-                    <p className="font-headline text-[16px] text-dark mb-1 leading-snug">{card.title}</p>
-                    <p className="text-dark/55 text-[13px] leading-relaxed">{card.desc}</p>
+                    <p className="font-headline text-[16px] text-dark font-semibold mb-1 leading-snug">{card.title}</p>
+                    <p className="text-dark/90 text-[13px] font-medium leading-relaxed">{card.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -107,19 +107,18 @@ export default function Equipment() {
           <FadeIn delay={450}>
             <div className="text-center bg-dark rounded-2xl px-8 py-8 mb-10 shadow-[0_12px_40px_rgba(0,0,0,0.14)]">
               <span className="block font-headline text-[64px] leading-none text-primary/20 mb-1 select-none">&ldquo;</span>
-              <p className="text-cream text-[17px] font-medium italic leading-relaxed mb-4">
+              <p className="text-cream text-[17px] font-semibold italic leading-relaxed mb-4">
                 O foco não é ter máquinas industriais.
                 <br />
                 É se organizar para produzir, aprender a pensar, construir e apresentar suas peças como um ateliê artístico.
               </p>
-              <p className="text-cream/50 text-[12px] font-semibold tracking-[0.15em] uppercase">— Leandro Mendes</p>
+              <p className="text-cream/90 text-[12px] font-bold tracking-[0.15em] uppercase">Leandro Mendes</p>
             </div>
           </FadeIn>
 
           <FadeIn delay={500}>
-            <div className="flex flex-col items-center gap-2">
-              <CTAButton>✨ Quero participar do Laboratório</CTAButton>
-              <span className="text-muted text-xs tracking-wide">Mesmo sem um ateliê profissional</span>
+            <div className="flex flex-col items-center gap-1.5">
+              <CTAButton>✨ Comprar Agora</CTAButton>
             </div>
           </FadeIn>
 

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import FadeIn from '@/components/FadeIn'
 
 const materials = [
@@ -42,14 +43,14 @@ export default function Bonus() {
             </h2>
           </FadeIn>
           <FadeIn delay={140}>
-            <p className="text-dark/65 text-[16px] leading-relaxed mb-4">
+            <p className="text-dark/95 text-[16px] font-medium leading-relaxed mb-4">
               Mais do que bônus, esses materiais foram pensados para facilitar processos, organizar o aprendizado e elevar o nível da sua produção desde o início.
             </p>
           </FadeIn>
           <FadeIn delay={180}>
             <div className="inline-block bg-white border border-primary/20 rounded-xl px-6 py-4 shadow-card">
-              <p className="text-dark/60 text-[15px] leading-relaxed italic mb-1">E sinceramente?</p>
-              <p className="text-dark/80 text-[15px] leading-relaxed font-medium">
+              <p className="text-dark/85 text-[15px] leading-relaxed italic mb-1">E sinceramente?</p>
+              <p className="text-dark text-[15px] leading-relaxed font-semibold">
                 O valor dos materiais enviados já representa uma parte muito importante da experiência do Laboratório.
               </p>
             </div>
@@ -57,20 +58,59 @@ export default function Bonus() {
         </div>
 
         {/* Material cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto mb-12">
           {materials.map((item, i) => (
             <FadeIn key={item.title} delay={220 + i * 80}>
-              <div className="relative flex flex-col bg-white border border-dark/8 rounded-2xl px-6 py-6 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover hover:border-primary/25 transition-all duration-300 h-full">
+              <div className="relative flex flex-col bg-white border border-dark/15 rounded-2xl px-6 py-6 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover hover:border-primary/25 transition-all duration-300 h-full">
                 <div className="absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-gradient-to-b from-primary to-primary/20" />
                 <div className="flex items-start gap-3 mb-3 pl-1">
                   <span className="text-primary text-[14px] font-bold mt-0.5 shrink-0">✦</span>
-                  <p className="font-headline text-[15px] text-dark leading-snug">{item.title}</p>
+                  <p className="font-headline text-[15px] text-dark font-semibold leading-snug">{item.title}</p>
                 </div>
-                <p className="text-dark/60 text-[13px] leading-relaxed pl-1">{item.desc}</p>
+                <p className="text-dark/90 text-[13px] font-medium leading-relaxed pl-1">{item.desc}</p>
               </div>
             </FadeIn>
           ))}
         </div>
+
+        {/* Visual gallery of templates (gabaritos) */}
+        <FadeIn delay={400}>
+          <div className="max-w-4xl mx-auto mt-16 mb-16 px-4">
+            <div className="text-center mb-8">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-primary mb-2 block">
+                Visualização do Kit Físico
+              </span>
+              <h3 className="font-headline text-[clamp(1.25rem,2.2vw,1.75rem)] font-bold text-dark mb-3">
+                Fotos reais dos gabaritos e displays de apoio:
+              </h3>
+            </div>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+              {[
+                { src: '/gabarito/Baixa-25.jpg', alt: 'Display & Fichas' },
+                { src: '/gabarito/Baixa-26.jpg', alt: 'Gabarito da Pasta' },
+                { src: '/gabarito/Baixa-27.jpg', alt: 'Gabarito de Envelope' },
+                { src: '/gabarito/Baixa-28.jpg', alt: 'Gabarito de Marcador' },
+                { src: '/gabarito/Baixa-29.jpg', alt: 'Coleção Completa' },
+              ].map((img, i) => (
+                <div key={i} className="flex flex-col gap-2">
+                  <div className="group relative aspect-[3/4] rounded-xl overflow-hidden shadow-card border border-dark/15 bg-white">
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 50vw, 20vw"
+                    />
+                  </div>
+                  <p className="text-[12px] font-bold text-dark/95 text-center leading-tight">
+                    {img.alt}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
 
         {/* Closing */}
         <FadeIn delay={520}>
@@ -78,10 +118,10 @@ export default function Bonus() {
             <h3 className="font-headline text-[clamp(1.3rem,2.5vw,1.9rem)] font-bold text-dark mb-4">
               Muito mais do que presentes.
             </h3>
-            <p className="text-dark/65 text-[16px] leading-relaxed mb-3">
+            <p className="text-dark/95 text-[16px] font-medium leading-relaxed mb-3">
               Esses materiais foram criados para apoiar o seu crescimento técnico, artístico e organizacional dentro da encadernação artesanal.
             </p>
-            <p className="text-dark/65 text-[16px] leading-relaxed">
+            <p className="text-dark/90 text-[16px] leading-relaxed">
               São ferramentas pensadas para acompanhar o seu novo momento como artesã papeleira.
             </p>
           </div>
@@ -92,10 +132,10 @@ export default function Bonus() {
           <div className="flex flex-col items-center gap-1.5">
             <div className="bg-dark rounded-xl px-7 py-4 text-center shadow-dark-card">
               <p className="text-cream text-[14px] font-semibold">
-                ✨ Todos os materiais físicos estão inclusos para as inscritas no Laboratório
+                ✨ Todos os materiais físicos (presentes) são 100% gratuitos para as inscritas no Laboratório
               </p>
             </div>
-            <p className="text-muted text-[12px] tracking-wide">(frete por conta da aluna)</p>
+            <p className="text-dark/85 text-[12px] font-bold tracking-wide uppercase">(sendo o frete pago à parte)</p>
           </div>
         </FadeIn>
 

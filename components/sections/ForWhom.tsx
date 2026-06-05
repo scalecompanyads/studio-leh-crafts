@@ -40,15 +40,15 @@ export default function ForWhom() {
           <FadeIn delay={80}>
             <h2 className="font-headline text-[clamp(1.75rem,4vw,3rem)] font-bold text-white leading-[1.15] max-w-2xl mx-auto mb-5">
               Para artesãs que querem crescer{' '}
-              <em className="text-cream/90 not-italic">para além das técnicas</em>
+              <em className="text-cream not-italic">para além das técnicas</em>
             </h2>
           </FadeIn>
 
           <FadeIn delay={150}>
-            <p className="text-cream/75 text-[16px] max-w-xl mx-auto leading-relaxed mb-2">
+            <p className="text-cream text-[16px] max-w-xl mx-auto font-medium leading-relaxed mb-2">
               O Laboratório da Encadernação foi pensado para quem deseja desenvolver não apenas habilidade manual, mas também presença, identidade e visão dentro da economia criativa.
             </p>
-            <p className="text-cream/60 text-[15px] max-w-md mx-auto leading-relaxed">
+            <p className="text-cream/90 text-[15px] max-w-md mx-auto font-medium leading-relaxed">
               Se você se identifica com algum desses caminhos, provavelmente o Laboratório foi feito para você:
             </p>
           </FadeIn>
@@ -57,11 +57,11 @@ export default function ForWhom() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-3xl mx-auto mb-14">
           {profiles.map((profile, i) => (
             <FadeIn key={profile} delay={200 + i * 80}>
-              <div className="relative overflow-hidden flex items-start gap-4 bg-white/6 border border-white/10 rounded-xl px-6 py-5 hover:bg-white/10 hover:border-primary/35 transition-all duration-300 h-full">
-                <span className="flex-shrink-0 w-7 h-7 mt-0.5 rounded-full flex items-center justify-center bg-accent/20 border border-accent/40 text-accent font-bold text-[13px]">
+              <div className="relative overflow-hidden flex items-start gap-4 bg-white/6 border border-white/15 rounded-xl px-6 py-5 hover:bg-white/10 hover:border-primary/35 transition-all duration-300 h-full">
+                <span className="flex-shrink-0 w-7 h-7 mt-0.5 rounded-full flex items-center justify-center bg-accent border border-accent/40 text-cream font-bold text-[13px]">
                   ✓
                 </span>
-                <span className="text-cream/90 text-[15px] leading-snug">{profile}</span>
+                <span className="text-cream text-[15px] font-semibold leading-snug">{profile}</span>
               </div>
             </FadeIn>
           ))}
@@ -69,12 +69,12 @@ export default function ForWhom() {
 
         {/* Closing */}
         <FadeIn delay={700}>
-          <div className="max-w-xl mx-auto text-center border-t border-white/10 pt-10">
-            <p className="text-cream/70 text-[16px] leading-relaxed mb-4">
+          <div className="max-w-xl mx-auto text-center border-t border-white/15 pt-10">
+            <p className="text-cream/90 text-[16px] font-medium leading-relaxed mb-4">
               O Laboratório nasce justamente para esse momento:
             </p>
-            <p className="text-cream text-[17px] leading-[1.9] font-medium">
-              quando a artesã percebe que não quer apenas produzir peças bonitas —<br />
+            <p className="text-cream text-[17px] leading-[1.9] font-semibold">
+              quando a artesã percebe que não quer apenas produzir peças bonitas,<br />
               mas construir um trabalho com mais intenção, presença e valor.
             </p>
           </div>

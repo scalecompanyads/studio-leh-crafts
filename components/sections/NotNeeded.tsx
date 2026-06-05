@@ -5,7 +5,7 @@ const items = [
   'Máquinas industriais, prensas ou ferramentas raras',
   'Material importado ou caro',
   'Ateliê montado',
-  '"Dom" — precisa de método',
+  '"Dom" (precisa de método)',
 ]
 
 export default function NotNeeded() {
@@ -29,11 +29,11 @@ export default function NotNeeded() {
                 delay={i * 70}
                 className={items.length % 2 !== 0 && i === items.length - 1 ? 'sm:col-span-2 sm:max-w-[calc(50%-5px)] sm:mx-auto sm:w-full' : ''}
               >
-                <div className="flex items-center gap-3.5 bg-cream border border-dark/8 rounded-xl px-4 py-4 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-card transition-all duration-300">
+                <div className="flex items-center gap-3.5 bg-cream border border-dark/15 rounded-xl px-4 py-4 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-card transition-all duration-300">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary/10 border border-primary/25 text-primary font-bold text-xs">
                     ✗
                   </span>
-                  <span className="text-dark/75 font-medium text-[14px] leading-snug">{item}</span>
+                  <span className="text-dark font-semibold text-[14px] leading-snug">{item}</span>
                 </div>
               </FadeIn>
             ))}
